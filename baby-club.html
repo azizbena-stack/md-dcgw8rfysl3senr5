@@ -224,6 +224,12 @@ nav .dot{position:absolute;top:0;left:calc(50% + 5px);width:8px;height:8px;borde
 .pulse-card{animation:buzz 7s infinite}
 @keyframes buzz{0%,92%,100%{box-shadow:0 0 6px color-mix(in srgb,var(--a) 80%,transparent),0 0 18px color-mix(in srgb,var(--a) 40%,transparent),inset 0 0 12px color-mix(in srgb,var(--a) 30%,transparent)}94%{box-shadow:none}96%{box-shadow:0 0 10px var(--a),0 0 26px var(--a)}}
 }
+
+nav button{white-space:nowrap;overflow:hidden;text-overflow:clip;letter-spacing:-.01em}@media (max-width:380px){nav button{font-size:8.5px}nav svg{width:20px;height:20px}}header b{min-width:3.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media (max-width:380px){header .live{font-size:0;gap:0;padding:5px}header button{padding:6px 8px;font-size:11px}}header button{white-space:nowrap;flex:none}header .live{flex:none;white-space:nowrap}
+header .live{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#e0182d;border-radius:999px;padding:3px 7px}
+header .live i{width:6px;height:6px;border-radius:50%;background:#fff}
+#grid>.fresh{outline:2px solid var(--a);outline-offset:-2px}
+@media (prefers-reduced-motion:no-preference){header .live i{animation:dotp 1.2s ease-in-out infinite}#grid>.fresh{animation:pop2 .6s cubic-bezier(.2,.9,.3,1.4) both,tagp 1.5s ease-in-out 3}}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
 .hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
@@ -291,7 +297,7 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
 </head>
 <body>
 <div class="demo">Démo · maquette non officielle</div>
-<header><img class="logo" src="baby-club-logo.jpg" alt=""><b id="h-nom"></b><button onclick="go('orga')">Espace gérant</button></header>
+<header><img class="logo" src="baby-club-logo.jpg" alt=""><b id="h-nom"></b><span class="live" id="live-pill" hidden><i></i>En direct</span><button onclick="go('orga')">Espace gérant</button></header>
 
 <section id="home" class="on">
   <div class="hero"><img id="hero" alt=""><div class="over"><div class="k">Prochaine soirée</div><h1 id="nx-name"></h1><div class="mut" id="nx-when"></div></div></div>
@@ -478,6 +484,13 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <button class="btn ghost" style="margin-top:10px" onclick="toggleSub()" id="sub-bt"></button>
   </div>
   <div class="card">
+    <b class="u" style="font-size:13px">Instagram en direct</b>
+    <div class="row"><span>@<span id="ig-acc"></span></span><b id="ig-st">Non connecté</b></div>
+    <p class="mut">Le club se connecte une seule fois avec son compte Instagram pro. Ensuite, chaque post et chaque story publiés sur Instagram arrivent dans l'app en 1 minute environ, sans rien refaire.</p>
+    <button class="btn" style="margin-top:10px" onclick="toast('Démo : ici s\'ouvre la connexion Meta (compte Instagram pro du club)')">Connecter mon Instagram</button>
+    <button class="btn ghost" onclick="simLive()">Simuler un nouveau post (démo)</button>
+  </div>
+  <div class="card">
     <b class="u" style="font-size:13px">Ajouter une soirée</b>
     <input type="text" id="ad-nom" placeholder="Nom de la soirée" style="width:100%;margin:10px 0 8px">
     <input type="date" id="ad-date" style="width:100%;margin:0 0 8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:inherit">
@@ -530,7 +543,8 @@ const P = 'baby-club-';
 const C = {"nom": "Baby Club", "court": "babyclub", "ville": "Marseille", "adresse": "2 rue André Poggioli, 13006 Marseille", "lat": 43.2937, "lon": 5.3856, "instagram": "babyclub.ofc", "tel": "0619982922", "billetterie": "https://shotgun.live/fr/venues/baby-club", "horaires": "Dès 23:59 · lun., mer., jeu. et week-end", "fermeture": "06:00", "slogan": "De grands noms dans un petit club", "apropos": "En plein cœur de La Plaine, le Baby invite les talents internationaux de la techno et de la house dans une atmosphère intimiste, jamais plus de 300 personnes. Une référence de la musique électronique à Marseille, qui fête ses 16 ans cet automne.", "chiffres": [["16 ans", "de nuits"], ["300", "personnes max"], ["19,7 k", "abonnés IG"]], "liens": [["Shotgun", "https://shotgun.live/fr/venues/baby-club"], ["Réserver", "tel:0619982922"]], "hero": "12", "niveau": "Baby addict", "soirees": [{"nom": "Osmose", "date": "2026-10-14T23:59", "prix": "5,99 €", "genres": ["Techno", "Melodic"], "lineup": ["Anthony Capaldi", "Immek"], "url": "https://shotgun.live/fr/events/osmose-antdhony-capaldi-immek", "img": "10"}, {"nom": "Groove Or Nothing", "date": "2026-10-15T23:59", "prix": "5,99 €", "genres": ["House", "Tech house"], "lineup": ["Zak", "Vassalo"], "url": "https://shotgun.live/fr/events/groove-or-nothing-zak-vassalo", "img": "11"}, {"nom": "Anniversary 16 Years", "date": "2026-10-16T23:59", "prix": "9,99 €", "genres": ["Minimal house", "Tech house"], "lineup": ["Shonky", "Lenny & Lowen"], "url": "https://shotgun.live/fr/events/baby-anniversary-16-years-shonky-lenny-lowen", "img": "1"}, {"nom": "Anniversary 16 Years", "date": "2026-10-17T23:59", "prix": "9,99 €", "genres": ["Indie dance", "House"], "lineup": ["Joey Daniel", "Komeks"], "url": "https://shotgun.live/fr/events/baby-anniversary-16-years-joey-daniel-komeks", "img": "3"}, {"nom": "Osmose", "date": "2026-10-21T23:59", "prix": "5,99 €", "genres": ["Melodic", "Techno"], "lineup": ["Jason Case", "Immek"], "url": "https://shotgun.live/fr/events/osmose-jasorn-case-immek", "img": "9"}, {"nom": "Groove Or Nothing", "date": "2026-10-22T23:59", "prix": "9,99 €", "genres": ["House", "Tech house"], "lineup": ["Vassalo (all night long)"], "url": "https://shotgun.live/fr/events/groove-or-nothing-vadssalo-all-night-long", "img": "12"}, {"nom": "Anniversary 16 Years", "date": "2026-10-23T23:59", "prix": "9,99 €", "genres": ["Techno", "Melodic"], "lineup": ["Oscar L", "Dickey & Vassalo"], "url": "https://shotgun.live/fr/events/baby-anniversary-16-years-oscar-l-dickey-vassalo", "img": "2"}, {"nom": "Anniversary 16 Years", "date": "2026-10-24T23:59", "prix": "9,99 €", "genres": ["House", "Melodic"], "lineup": ["Goraab", "Saint Esprit"], "url": "https://shotgun.live/fr/events/baby-anniversary-16-years-goraab-saint-esprit", "img": "11"}, {"nom": "Osmose", "date": "2026-10-28T23:59", "prix": "5,99 €", "genres": ["Melodic", "Techno"], "lineup": ["Vesti", "Immek"], "url": "https://shotgun.live/fr/events/osrmose-vesti-immek", "img": "10"}, {"nom": "Groove Or Nothing", "date": "2026-10-29T23:59", "prix": "5,99 €", "genres": ["House", "Tech house"], "lineup": ["Valero", "Vassalo"], "url": "https://shotgun.live/fr/events/groove-or-nothing-valero-vassalo", "img": "9"}, {"nom": "Halloween Sixteen Years", "date": "2026-10-31T23:59", "prix": "11,99 €", "genres": ["House", "Tech house"], "lineup": ["Marc Maya", "Toni Varga"], "url": "https://shotgun.live/fr/events/baby-club-halloween-sixteen-years-marc-maya-toni-varga", "img": "12"}, {"nom": "Recless Records", "date": "2026-12-12T23:59", "prix": "5,99 €", "genres": ["House", "Tech house"], "lineup": ["Secret Guest", "Jaya", "Finks", "Macew"], "url": "https://shotgun.live/fr/events/recless-record-surprise-guest-jaya-finks-macew", "img": "2"}], "passees": [{"nom": "Lundi C'est Baby", "date": "2026-10-12T23:59", "genres": ["Hard groove"], "lineup": ["Tidjani", "Supernova", "Kony"], "img": "11"}, {"nom": "Anniversary 16 Years", "date": "2026-10-10T23:59", "genres": ["Afro house", "Melodic"], "lineup": ["Messina", "Balzac"], "img": "10"}, {"nom": "Anniversary 16 Years", "date": "2026-10-09T23:59", "genres": ["Melodic", "Techno"], "lineup": ["Space 92", "Immek & Pops"], "img": "7"}, {"nom": "Opening des 16 ans", "date": "2026-10-03T23:59", "genres": ["Techno"], "lineup": ["Marco Faraone"], "img": "8"}], "ilsontjoue": ["NTO", "Matt Sassari", "Mosimann", "Space 92", "Obskür", "Sam Paganini", "Traumer", "Popof", "Oxia", "Tony Romera", "Chambord", "Grossomoddo"], "posts": [["DechqyKorfW", "16.10 · Shonky"], ["DdEorqoojSM", "16 ans de vibes", "reel"], ["Dee5FGqoHCG", "Shonky & Joey Daniel", "reel"], ["DeOv0S3IAfF", "La vie du club", "reel"], ["DeMyoSGooQ5", "Encore l'anniversaire", "reel"], ["DeMLBIXiCB1", "Marco Faraone"], ["DeJhSWjCObi", "Space 92"], ["DdhPXsfiDup", "Opening des 16 ans"], ["DcjKrclCHJi", "Dans la foule"], ["DbabyHkiAFe", "Derrière les platines"], ["DcgvQiJIebf", "Ambiance", "reel"], ["DWzH0vOCFY1", "Sous l'étoile"]], "sondage": [["Traumer", 162], ["Matt Sassari", 141], ["Sam Paganini", 118], ["Oxia", 94]], "villes": [["Marseille 6e", 284], ["Marseille 1er", 197], ["Aix-en-Provence", 121], ["Aubagne", 64], ["La Ciotat", 41], ["Autres", 88]], "faq": [["Âge minimum", "Le club est réservé aux majeurs. Une pièce d'identité peut être demandée à l'entrée."], ["Petit club, grosse demande", "300 personnes maximum : les soirées affichent souvent complet, prends ton billet à l'avance."], ["Billet", "Les billets sont sur Shotgun : garde le QR dans ton téléphone, il est scanné à l'entrée."], ["Réserver", "Pour une réservation, appelle le 06 19 98 29 22."]], "da": {"bg": "#050507", "card": "#0e0e13", "line": "#25252e", "txt": "#f3f3f6", "mut": "#8f8f9a", "a": "#ff2b3b", "a2": "#a9d8ff", "glow": "0 0 18px rgba(255,43,59,.55)", "fd": "Archivo Narrow", "fdw": "700", "fdl": ".01em", "fb": "Inter", "css": "header b{font-family:'Comfortaa',sans-serif;text-transform:none;letter-spacing:0;font-size:20px;color:transparent;-webkit-text-stroke:1.2px #fff}.hero h1{background:linear-gradient(180deg,#fff 0%,#c9d4df 45%,#7d8893 60%,#eef3f8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(169,216,255,.55));font-size:38px}.hero .k{color:var(--a2);text-shadow:0 0 12px rgba(169,216,255,.7)}", "fx": [["Comfortaa", "700"]]}, "id": "baby-club"};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const img = n => P + n + '.jpg';
+const LIVEIMG = {};
+const img = n => /^(https?:|data:)/.test(n) ? n : (LIVEIMG[n] || P + n + '.jpg');
 const KEY = 'club-' + C.id;
 const st = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } })();
 st.been ||= []; st.fav ||= []; st.sw ||= {};
@@ -828,12 +842,49 @@ function sendPush() { const v = $('push').value.trim(); if (!v) return toast('É
 
 renderStars(); renderMeet(); renderPoll(); renderEvents(); renderArtists(); renderMe(); renderFid(); renderSub(); renderAdded(); renderPlan(); renderResa(); renderGuest(); renderContest();
 const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) go(tab);
+
+// En direct : quand le club a connecté son Instagram, un fichier « live » (posts + stories, mis à jour par l'API Meta)
+// est relu toutes les minutes : les nouveautés apparaissent sans republier l'app. Sans fichier, rien ne change.
+$('ig-acc').textContent = C.instagram;
+const LIVE_URL = C.live_url || P + 'live.json';
+let liveMaj = '';
+function applyLive(L, quiet) {
+  const first = C.posts[0] && C.posts[0][0];
+  if (L.posts && L.posts.length) {
+    C.posts = L.posts.map(([code, cap, type]) => [code, cap, type || undefined]);
+    L.posts.forEach((p, i) => { if (p[3]) LIVEIMG[i + 1] = p[3]; });
+    renderGrid((document.querySelector('#mchips .on') || {}).dataset?.k || 'all');
+    if (first && C.posts[0][0] !== first) { const a = $('grid').firstElementChild; if (a) a.classList.add('fresh'); if (!quiet) toast('Nouveau post de @' + C.instagram); }
+  }
+  if (L.stories && L.stories.length) { STORIES.splice(0, STORIES.length, ...L.stories); renderStories(); }
+  $('live-pill').hidden = false; $('ig-st').textContent = 'Connecté · en direct';
+}
+async function pollLive() {
+  if (document.hidden) return;
+  try {
+    const r = await fetch(LIVE_URL + (LIVE_URL.includes('?') ? '&' : '?') + 't=' + Date.now(), {cache: 'no-store'});
+    if (!r.ok) return;
+    const L = await r.json();
+    if (L.maj && L.maj !== liveMaj) { applyLive(L, !liveMaj); liveMaj = L.maj; }
+  } catch (e) { /* pas de fichier live : l'app garde ses données */ }
+}
+function simLive() {  // démo : montre ce qui se passe quand le club publie
+  const n = String(1 + Math.floor(Math.random() * C.posts.length));
+  const L = {maj: String(Date.now()), posts: [['demo' + Date.now(), C.court + ' · à l\'instant'], ...C.posts.map((p, i) => [...p.slice(0, 3), LIVEIMG[i + 1] || img(i + 1)])].slice(0, 12)};
+  L.posts[0][3] = img(n);
+  L.stories = [['En direct', [img(n)]], ...STORIES.filter(s => s[0] !== 'En direct')];
+  applyLive(L); liveMaj = L.maj; st.seen = (st.seen || []).filter(x => x !== 'En direct'); renderStories();
+}
+pollLive(); setInterval(pollLive, 60000);
+document.addEventListener('visibilitychange', pollLive);
+
 if (location.search.includes('test')) {
   console.assert(EVENTS.length > 0 && NEXT, 'soirées');
   console.assert(document.querySelectorAll('#grid a').length === C.posts.length, 'moments');
   console.assert(document.querySelector('.pulse-card') && document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
+  { const n0 = C.posts.length, c0 = C.posts[0][0]; simLive(); console.assert(C.posts[0][0] !== c0 && C.posts.length <= Math.max(n0, 12) && !$('live-pill').hidden && STORIES[0][0] === 'En direct', 'direct'); }
   console.log('selftest ok');
 }
 
