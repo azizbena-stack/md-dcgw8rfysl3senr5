@@ -195,6 +195,20 @@ select,.step{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
 button:focus-visible,a:focus-visible{outline:2px solid var(--a2);outline-offset:2px}
 header b{letter-spacing:.4em}.hero h1{font-size:30px}.btn{background:linear-gradient(90deg,#c7b3ff,#ff8fd6)}.logo{border-radius:8px}
 
+
+nav button{position:relative;min-width:0;font-size:9.5px}
+nav svg{width:21px;height:21px}
+nav .dot{position:absolute;top:0;left:calc(50% + 5px);width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 0 2px var(--bg)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.sgrid button{position:relative;aspect-ratio:9/16;border-radius:var(--r);overflow:hidden;padding:0;background:var(--card);border:1px solid var(--line);text-align:left;color:#fff}
+.sgrid button>img{width:100%;height:100%;object-fit:cover;display:block}
+.sgrid button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 30%,transparent 55%,rgba(0,0,0,.85))}
+.sgrid .av{position:absolute;top:10px;left:10px;width:40px;height:40px;border-radius:50%;padding:2px;background:conic-gradient(var(--a),var(--a2),var(--a));z-index:1}
+.sgrid .av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid #000;display:block}
+.sgrid .seen .av{background:#777}
+.sgrid b{position:absolute;left:12px;right:12px;bottom:28px;z-index:1;font:var(--fdw) 17px var(--fd),sans-serif;text-transform:var(--fdt);letter-spacing:var(--fdl);text-shadow:0 1px 6px #000}
+.sgrid small{position:absolute;left:12px;bottom:12px;z-index:1;font-size:11px;opacity:.85}
+.sgrid .new{position:absolute;top:16px;right:10px;z-index:1;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--a);color:var(--aon);padding:3px 7px;border-radius:999px}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
 .hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
@@ -227,6 +241,36 @@ img{transition:transform .5s ease}
 .card img:hover,.card img:active{transform:scale(1.04)}
 .tag.ta{animation:tagp 3s ease-in-out infinite}
 @keyframes tagp{50%{box-shadow:0 0 10px var(--a)}}
+}
+
+/* Animations, 2e couche */
+@media (prefers-reduced-motion:no-preference){
+section{animation:in2 .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes in2{from{opacity:0;transform:translateY(14px);filter:blur(4px)}}
+.hero::before{content:"";position:absolute;inset:-30% -30% 20%;pointer-events:none;mix-blend-mode:screen;opacity:.55;background:conic-gradient(from 180deg at 50% 0%,transparent 0 41%,color-mix(in srgb,var(--a) 55%,transparent) 44%,transparent 47% 53%,color-mix(in srgb,var(--a2) 45%,transparent) 56%,transparent 59%);transform-origin:50% 0;animation:sweep 7s ease-in-out infinite alternate}
+@keyframes sweep{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.hero h1{animation:up .8s cubic-bezier(.2,.8,.2,1) both,glowh 3.2s ease-in-out 1s infinite}
+@keyframes glowh{50%{text-shadow:0 0 18px var(--a),0 0 2px var(--a)}}
+nav button.on::before{content:"";position:absolute;top:-8px;left:28%;right:28%;height:3px;border-radius:3px;background:var(--a);box-shadow:var(--glow);animation:pill .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pill{from{transform:scaleX(0)}}
+nav .dot{animation:dotp 1.6s ease-in-out infinite}
+@keyframes dotp{50%{transform:scale(1.35);box-shadow:0 0 0 2px var(--bg),0 0 10px var(--a)}}
+.stories .ring,.sgrid .av{animation:spin 4s linear infinite}
+.stories .ring img,.sgrid .av img{animation:spin 4s linear infinite reverse}
+.stories .seen .ring,.stories .seen .ring img,.sgrid .seen .av,.sgrid .seen .av img{animation:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sgrid button{animation:pop2 .5s cubic-bezier(.2,.9,.3,1.2) both}
+.sgrid button>img{animation:kb 14s ease-in-out infinite alternate}
+.sgrid button:nth-child(2){animation-delay:.07s}.sgrid button:nth-child(3){animation-delay:.14s}.sgrid button:nth-child(4){animation-delay:.21s}.sgrid button:nth-child(5){animation-delay:.28s}.sgrid button:nth-child(6){animation-delay:.35s}
+.sgrid .new{animation:dotp 1.6s ease-in-out infinite}
+#grid>*{animation:pop2 .45s cubic-bezier(.2,.9,.3,1.2) both}
+#grid>*:nth-child(3n+2){animation-delay:.05s}#grid>*:nth-child(3n){animation-delay:.1s}
+@keyframes pop2{from{opacity:0;transform:scale(.88)}}
+.card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s}
+@media (hover:hover){.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px -12px var(--a);border-color:color-mix(in srgb,var(--a) 45%,var(--line))}}
+#toast.on{animation:toastin .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes toastin{from{transform:translate(-50%,30px) scale(.9)}}
+#story>img{animation:kb 6s ease-out both}
 }
 </style>
 </head>
@@ -283,6 +327,11 @@ img{transition:transform .5s ease}
   <div class="grid" id="grid"></div>
 </section>
 
+<section id="stab">
+  <h2>Stories</h2>
+  <p class="mut pad" style="margin:-4px 0 12px" id="stab-txt"></p>
+  <div class="sgrid" id="sgrid"></div>
+</section>
 <section id="concours">
   <h2>Jeu concours</h2>
   <div class="card prize">
@@ -429,6 +478,7 @@ img{transition:transform .5s ease}
 <div id="lock" hidden><div><h2 style="justify-content:center">Application suspendue</h2><p class="mut" style="margin:8px 0 16px">L'abonnement du club est inactif (simulation). Tout revient dès que le gérant le réactive.</p><button class="btn" onclick="toggleSub()">Réactiver (démo)</button></div></div>
 <nav id="nav">
   <button data-t="home" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+  <button data-t="stab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-dasharray="3.2 2.2"/><circle cx="12" cy="12" r="4.6"/></svg>Stories<i class="dot" id="st-dot" hidden></i></button>
   <button data-t="events"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Soirées</button>
   <button data-t="lineup"><svg viewBox="0 0 24 24"><circle cx="9" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M12 18V5l9-2v13"/></svg>Line-up</button>
   <button data-t="moments"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/></svg>Moments</button>
@@ -447,7 +497,7 @@ img{transition:transform .5s ease}
 
 <script>
 const P = 'trolleybus-';
-const C = {"nom": "Trolleybus", "court": "Trolleybus", "ville": "Marseille", "adresse": "24 quai de Rive Neuve, 13007 Marseille", "lat": 43.2919, "lon": 5.37, "instagram": "letrolley", "billetterie": "https://www.letrolley.com/", "horaires": "Du mardi au samedi", "slogan": "3 clubs, 3 atmosphères", "apropos": "Depuis 1989 sous les voûtes du Vieux-Port : le W Club (généraliste, rap, urban), le Studio 24 (house, tech house, techno) et Shutdown (shatta, afrobeat, RnB). Une institution marseillaise.", "chiffres": [["1989", "depuis"], ["3", "clubs"], ["8,9 k", "abonnés IG"]], "liens": [["Site", "https://www.letrolley.com/"], ["W Club", "https://www.instagram.com/w_club_trolleybus/"], ["Studio 24", "https://www.instagram.com/studio_24_trolleybus/"]], "hero": "12", "niveau": "Pilier du Trolley", "rdv": ["L'entrée quai de Rive Neuve", "Le W Club", "Le Studio 24", "Shutdown", "Le vestiaire"], "semaine": {"1": ["W Club", [], "", ["Généraliste", "Rap"]], "2": ["W Club & Studio 24", [], "", ["Rap", "House"]], "3": ["W Club", [], "", ["Généraliste", "Urban"]], "4": ["W Club · Studio 24 · Shutdown", [], "", ["Techno", "Afro"]], "5": ["W Club · Studio 24 · Shutdown", [], "", ["House", "Rap"]]}, "posts": [["Ddj1RNYCDiX", "Programme de la semaine"], ["DdZZGgiCOmP", "Studio 24"], ["DdUK4F1CJi0", "W Club"], ["DdRl3THiM3s", "Programme de la semaine"], ["DdEA1AjiKlP", "Été · Studio 24"], ["DdCWYCbCK-e", "Été · W Club"], ["Dc_ussLiMMm", "Programme de la semaine"], ["Dc053HTCDmZ", "Studio 24"], ["DcvvbXriFwK", "W Club"], ["DctwcXoCCfj", "Programme de la semaine"], ["Dcg4xHliP_b", "Studio 24"], ["DceBvHFCJ-H", "W Club"]], "faq": [["W Club", "Généraliste, rap, urban · du mardi au samedi."], ["Studio 24", "House, tech house, techno · mercredi, vendredi et samedi."], ["Shutdown", "Shatta, afrobeat, RnB, rap · vendredi et samedi."], ["Âge minimum", "Le club est réservé aux majeurs. Une pièce d'identité peut être demandée à l'entrée."], ["Réservations", "Les numéros d'infos et de réservation sont sur l'Instagram de chaque club."]], "da": {"bg": "#060606", "card": "#111014", "line": "#29272e", "txt": "#f5f3f7", "mut": "#9b97a3", "a": "#c7b3ff", "a2": "#ff8fd6", "aon": "#0b0b0b", "glow": "0 0 22px rgba(199,179,255,.35)", "r": "22px", "fd": "Josefin Sans", "fdw": "600", "fdl": ".2em", "fb": "Inter", "css": "header b{letter-spacing:.4em}.hero h1{font-size:30px}.btn{background:linear-gradient(90deg,#c7b3ff,#ff8fd6)}.logo{border-radius:8px}"}, "id": "trolleybus", "soirees": [{"nom": "W Club & Studio 24", "date": "2026-10-14T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "1"}, {"nom": "W Club", "date": "2026-10-15T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "2"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-16T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "3"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-17T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "4"}, {"nom": "W Club", "date": "2026-10-20T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "5"}, {"nom": "W Club & Studio 24", "date": "2026-10-21T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "6"}, {"nom": "W Club", "date": "2026-10-22T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "7"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-23T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "8"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-24T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "9"}, {"nom": "W Club", "date": "2026-10-27T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "10"}, {"nom": "W Club & Studio 24", "date": "2026-10-28T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "11"}, {"nom": "W Club", "date": "2026-10-29T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "12"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-30T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "1"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-31T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "2"}, {"nom": "W Club", "date": "2026-11-03T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "3"}, {"nom": "W Club & Studio 24", "date": "2026-11-04T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "4"}], "passees": [], "villes": [["Marseille centre", 268], ["Marseille sud", 174], ["Aix-en-Provence", 96], ["Aubagne", 61], ["La Ciotat", 38], ["Autres", 85]], "sondage_q": "Vote pour la prochaine soirée à thème", "sondage": [["Années 2000", 158], ["Latino / reggaeton", 126], ["Afro / amapiano", 109], ["House", 91]]};
+const C = {"nom": "Trolleybus", "court": "Trolleybus", "ville": "Marseille", "adresse": "24 quai de Rive Neuve, 13007 Marseille", "lat": 43.2919, "lon": 5.37, "instagram": "letrolley", "billetterie": "https://www.letrolley.com/", "horaires": "Du mardi au samedi", "slogan": "3 clubs, 3 atmosphères", "apropos": "Depuis 1989 sous les voûtes du Vieux-Port : le W Club (généraliste, rap, urban), le Studio 24 (house, tech house, techno) et Shutdown (shatta, afrobeat, RnB). Une institution marseillaise.", "chiffres": [["1989", "depuis"], ["3", "clubs"], ["8,9 k", "abonnés IG"]], "liens": [["Site", "https://www.letrolley.com/"], ["W Club", "https://www.instagram.com/w_club_trolleybus/"], ["Studio 24", "https://www.instagram.com/studio_24_trolleybus/"]], "hero": "12", "niveau": "Pilier du Trolley", "rdv": ["L'entrée quai de Rive Neuve", "Le W Club", "Le Studio 24", "Shutdown", "Le vestiaire"], "semaine": {"1": ["W Club", [], "", ["Généraliste", "Rap"]], "2": ["W Club & Studio 24", [], "", ["Rap", "House"]], "3": ["W Club", [], "", ["Généraliste", "Urban"]], "4": ["W Club · Studio 24 · Shutdown", [], "", ["Techno", "Afro"]], "5": ["W Club · Studio 24 · Shutdown", [], "", ["House", "Rap"]]}, "posts": [["Ddj1RNYCDiX", "Programme de la semaine"], ["DdZZGgiCOmP", "Studio 24"], ["DdUK4F1CJi0", "W Club"], ["DdRl3THiM3s", "Programme de la semaine"], ["DdEA1AjiKlP", "Été · Studio 24"], ["DdCWYCbCK-e", "Été · W Club"], ["Dc_ussLiMMm", "Programme de la semaine"], ["Dc053HTCDmZ", "Studio 24"], ["DcvvbXriFwK", "W Club"], ["DctwcXoCCfj", "Programme de la semaine"], ["Dcg4xHliP_b", "Studio 24"], ["DceBvHFCJ-H", "W Club"]], "faq": [["W Club", "Généraliste, rap, urban · du mardi au samedi."], ["Studio 24", "House, tech house, techno · mercredi, vendredi et samedi."], ["Shutdown", "Shatta, afrobeat, RnB, rap · vendredi et samedi."], ["Âge minimum", "Le club est réservé aux majeurs. Une pièce d'identité peut être demandée à l'entrée."], ["Réservations", "Les numéros d'infos et de réservation sont sur l'Instagram de chaque club."]], "da": {"bg": "#060606", "card": "#111014", "line": "#29272e", "txt": "#f5f3f7", "mut": "#9b97a3", "a": "#c7b3ff", "a2": "#ff8fd6", "aon": "#0b0b0b", "glow": "0 0 22px rgba(199,179,255,.35)", "r": "22px", "fd": "Josefin Sans", "fdw": "600", "fdl": ".2em", "fb": "Inter", "css": "header b{letter-spacing:.4em}.hero h1{font-size:30px}.btn{background:linear-gradient(90deg,#c7b3ff,#ff8fd6)}.logo{border-radius:8px}"}, "id": "trolleybus", "soirees": [{"nom": "W Club", "date": "2026-10-20T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "1"}, {"nom": "W Club & Studio 24", "date": "2026-10-21T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "2"}, {"nom": "W Club", "date": "2026-10-22T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "3"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-23T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "4"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-24T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "5"}, {"nom": "W Club", "date": "2026-10-27T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "6"}, {"nom": "W Club & Studio 24", "date": "2026-10-28T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "7"}, {"nom": "W Club", "date": "2026-10-29T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "8"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-30T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "9"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-10-31T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "10"}, {"nom": "W Club", "date": "2026-11-03T23:59", "prix": "", "genres": ["Généraliste", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "11"}, {"nom": "W Club & Studio 24", "date": "2026-11-04T23:59", "prix": "", "genres": ["Rap", "House"], "lineup": [], "url": "https://www.letrolley.com/", "img": "12"}, {"nom": "W Club", "date": "2026-11-05T23:59", "prix": "", "genres": ["Généraliste", "Urban"], "lineup": [], "url": "https://www.letrolley.com/", "img": "1"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-11-06T23:59", "prix": "", "genres": ["Techno", "Afro"], "lineup": [], "url": "https://www.letrolley.com/", "img": "2"}, {"nom": "W Club · Studio 24 · Shutdown", "date": "2026-11-07T23:59", "prix": "", "genres": ["House", "Rap"], "lineup": [], "url": "https://www.letrolley.com/", "img": "3"}], "passees": [], "villes": [["Marseille centre", 268], ["Marseille sud", 174], ["Aix-en-Provence", 96], ["Aubagne", 61], ["La Ciotat", 38], ["Autres", 85]], "sondage_q": "Vote pour la prochaine soirée à thème", "sondage": [["Années 2000", 158], ["Latino / reggaeton", 126], ["Afro / amapiano", 109], ["House", 91]]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const img = n => P + n + '.jpg';
@@ -556,8 +606,11 @@ const STORIES = C.stories || [
   ['Le club', NUMS.slice(0, 3)], ['Coulisses', NUMS.slice(3, 7)], ['Souvenirs', NUMS.slice(7, 12)]].filter(s => s[1].length);
 st.seen ||= [];
 let sg = 0, si = 0;
+$('stab-txt').textContent = `Les stories de @${C.instagram}. Touche une story pour la regarder en plein écran.`;
 $('st-ft').textContent = `Démo : dans la version officielle, les vraies stories Instagram de @${C.instagram} arrivent ici automatiquement.`;
 function renderStories() {
+  $('sgrid').innerHTML = STORIES.map(([n, imgs], g) => `<button class="${st.seen.includes(n) ? 'seen' : ''}" onclick="openStory(${g})"><img src="${img(imgs[0])}" alt=""><span class="av"><img src="${P}logo.jpg" alt=""></span>${st.seen.includes(n) ? '' : '<i class="new">Nouveau</i>'}<b>${esc(n)}</b><small>${imgs.length} ${imgs.length > 1 ? 'stories' : 'story'}</small></button>`).join('');
+  $('st-dot').hidden = STORIES.every(([n]) => st.seen.includes(n));
   $('stories').innerHTML = STORIES.map(([n, imgs], g) => `<button class="${st.seen.includes(n) ? 'seen' : ''}" onclick="openStory(${g})"><div class="ring"><img src="${img(imgs[0])}" alt=""></div>${esc(n)}</button>`).join('');
 }
 function showStory() {
@@ -747,7 +800,7 @@ const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) 
 if (location.search.includes('test')) {
   console.assert(EVENTS.length > 0 && NEXT, 'soirées');
   console.assert(document.querySelectorAll('#grid a').length === C.posts.length, 'moments');
-  console.assert(document.querySelectorAll('nav button').length === 7 && $('ct-titre').textContent, 'concours');
+  console.assert(document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
   console.log('selftest ok');
