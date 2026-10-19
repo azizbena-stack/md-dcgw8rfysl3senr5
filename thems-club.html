@@ -224,6 +224,12 @@ nav .dot{position:absolute;top:0;left:calc(50% + 5px);width:8px;height:8px;borde
 .pulse-card{animation:buzz 7s infinite}
 @keyframes buzz{0%,92%,100%{box-shadow:0 0 6px color-mix(in srgb,var(--a) 80%,transparent),0 0 18px color-mix(in srgb,var(--a) 40%,transparent),inset 0 0 12px color-mix(in srgb,var(--a) 30%,transparent)}94%{box-shadow:none}96%{box-shadow:0 0 10px var(--a),0 0 26px var(--a)}}
 }
+
+nav button{white-space:nowrap;overflow:hidden;text-overflow:clip;letter-spacing:-.01em}@media (max-width:380px){nav button{font-size:8.5px}nav svg{width:20px;height:20px}}header b{min-width:3.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media (max-width:380px){header .live{font-size:0;gap:0;padding:5px}header button{padding:6px 8px;font-size:11px}}header button{white-space:nowrap;flex:none}header .live{flex:none;white-space:nowrap}
+header .live{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#e0182d;border-radius:999px;padding:3px 7px}
+header .live i{width:6px;height:6px;border-radius:50%;background:#fff}
+#grid>.fresh{outline:2px solid var(--a);outline-offset:-2px}
+@media (prefers-reduced-motion:no-preference){header .live i{animation:dotp 1.2s ease-in-out infinite}#grid>.fresh{animation:pop2 .6s cubic-bezier(.2,.9,.3,1.4) both,tagp 1.5s ease-in-out 3}}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
 .hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
@@ -291,7 +297,7 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
 </head>
 <body>
 <div class="demo">Démo · maquette non officielle</div>
-<header><img class="logo" src="thems-club-logo.jpg" alt=""><b id="h-nom"></b><button onclick="go('orga')">Espace gérant</button></header>
+<header><img class="logo" src="thems-club-logo.jpg" alt=""><b id="h-nom"></b><span class="live" id="live-pill" hidden><i></i>En direct</span><button onclick="go('orga')">Espace gérant</button></header>
 
 <section id="home" class="on">
   <div class="hero"><img id="hero" alt=""><div class="over"><div class="k">Prochaine soirée</div><h1 id="nx-name"></h1><div class="mut" id="nx-when"></div></div></div>
@@ -478,6 +484,13 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <button class="btn ghost" style="margin-top:10px" onclick="toggleSub()" id="sub-bt"></button>
   </div>
   <div class="card">
+    <b class="u" style="font-size:13px">Instagram en direct</b>
+    <div class="row"><span>@<span id="ig-acc"></span></span><b id="ig-st">Non connecté</b></div>
+    <p class="mut">Le club se connecte une seule fois avec son compte Instagram pro. Ensuite, chaque post et chaque story publiés sur Instagram arrivent dans l'app en 1 minute environ, sans rien refaire.</p>
+    <button class="btn" style="margin-top:10px" onclick="toast('Démo : ici s\'ouvre la connexion Meta (compte Instagram pro du club)')">Connecter mon Instagram</button>
+    <button class="btn ghost" onclick="simLive()">Simuler un nouveau post (démo)</button>
+  </div>
+  <div class="card">
     <b class="u" style="font-size:13px">Ajouter une soirée</b>
     <input type="text" id="ad-nom" placeholder="Nom de la soirée" style="width:100%;margin:10px 0 8px">
     <input type="date" id="ad-date" style="width:100%;margin:0 0 8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:inherit">
@@ -530,7 +543,8 @@ const P = 'thems-club-';
 const C = {"nom": "Them's", "court": "THEM'S", "ville": "Clermont-Ferrand", "adresse": "11 rue de Serbie, 63000 Clermont-Ferrand", "instagram": "thems_clermontferrand", "horaires": "Jeudi dès 23h · vendredi, samedi et veilles de fériés dès minuit", "fermeture": "05:00", "slogan": "Le club du centre-ville", "niveau": "Them's Lover", "apropos": "La discothèque du centre-ville de Clermont-Ferrand : soirées étudiantes le jeudi, soirées à thème le vendredi (années 2000, Meet Party, showcases) et Full Party 100 % généraliste le samedi avec Happy Shooter.", "chiffres": [["3", "soirs / semaine"], ["Happy", "shooter 0h-1h"], ["15 k", "abonnés IG"]], "hero": "6", "rdv": ["Rue de Serbie", "Le bar", "La piste", "Les tables", "Le vestiaire"], "faq": [["Tables", "Réservation de table par message Instagram ou Messenger."], ["Âge minimum", "Interdit aux mineurs, pièce d'identité obligatoire."]], "da": {"bg": "#110811", "card": "#1e0f1e", "line": "#3d2140", "txt": "#fff0fa", "mut": "#c79cc0", "a": "#ff7ac8", "a2": "#ffd1ea", "aon": "#2a0b22", "glow": "0 0 18px #ff7ac866", "r": "20px", "fd": "Pacifico", "fdw": "400", "fdt": "none", "fdl": "0", "fb": "Poppins", "css": ".logo{background:#ffd1ea}"}, "soirees": [{"nom": "BDE STAPS × Them's", "date": "2026-10-22T23:00", "prix": "Tarifs étudiants", "genres": ["Étudiant", "Généraliste"], "lineup": ["DJ Z Khan"], "url": "https://www.instagram.com/p/Deo2UD3jmIk/", "img": "2"}, {"nom": "Années 2000", "date": "2026-10-23T23:59", "prix": "", "genres": ["Hits 2000-2010"], "lineup": ["DJ Z Khan"], "url": "https://www.instagram.com/p/Deo2UD3jmIk/", "img": "6"}, {"nom": "Full Party", "date": "2026-10-24T23:59", "prix": "Happy Shooter 0h-1h", "genres": ["Généraliste"], "lineup": [], "url": "https://www.instagram.com/p/Deo2UD3jmIk/", "img": "8"}, {"nom": "Soirée étudiante", "date": "2026-10-29T23:00", "prix": "Tarifs étudiants", "genres": ["Étudiant"], "lineup": [], "url": "https://www.instagram.com/p/DdwM7KFmrx2/", "img": "1"}, {"nom": "Meet Party", "date": "2026-10-30T23:59", "prix": "", "genres": ["Généraliste"], "lineup": [], "url": "https://www.instagram.com/p/DdwM7KFmrx2/", "img": "10"}, {"nom": "Halloween · Killing Night", "date": "2026-10-31T23:59", "prix": "Shooter offert si déguisé", "genres": ["Généraliste", "Halloween"], "lineup": [], "url": "https://www.instagram.com/p/DeeqBlgCZlp/", "img": "3"}], "passees": [{"nom": "Showcase Kulturr", "date": "2026-10-16T23:59", "genres": ["Showcase"], "lineup": ["Kulturr"], "img": "7"}, {"nom": "Octobre rose · Hey Girls", "date": "2026-10-09T20:00", "genres": ["Généraliste"], "lineup": [], "img": "12"}, {"nom": "Multi générationnelle", "date": "2026-10-02T23:59", "genres": ["Années 80 à aujourd'hui"], "lineup": [], "img": "9"}], "lat": 45.78177, "lon": 3.07993, "villes": [["Clermont-Ferrand", 362], ["Chamalières", 66], ["Riom", 51], ["Aubière", 47], ["Cournon", 41], ["Autres", 88]], "posts": [["DdwM7KFmrx2", "Them's · 26 sept."], ["Deo2UD3jmIk", "Them's · 18 oct."], ["DeeqBlgCZlp", "Them's · 14 oct."], ["DegfuVeMn07", "Them's · 15 oct."], ["DeeqAGfEq2f", "Them's · 14 oct.", "reel"], ["DeZgXblDIDp", "Them's · 12 oct."], ["DeW53Wps5I1", "Them's · 11 oct.", "reel"], ["DePeDtgIgsk", "Them's · 8 oct.", "reel"], ["DeKFiOjjFZZ", "Them's · 6 oct."], ["DeFFVM7suSl", "Them's · 4 oct.", "reel"], ["Dd9Lpl8DWT9", "Them's · 1 oct."], ["DeHe1Zagbo_", "Them's · 5 oct."]], "tel": "", "liens": [], "id": "thems-club", "billetterie": "https://www.instagram.com/thems_clermontferrand/", "sondage_q": "Vote pour la prochaine soirée à thème", "sondage": [["Années 2000", 158], ["Latino / reggaeton", 126], ["Afro / amapiano", 109], ["House", 91]]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const img = n => P + n + '.jpg';
+const LIVEIMG = {};
+const img = n => /^(https?:|data:)/.test(n) ? n : (LIVEIMG[n] || P + n + '.jpg');
 const KEY = 'club-' + C.id;
 const st = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } })();
 st.been ||= []; st.fav ||= []; st.sw ||= {};
@@ -828,12 +842,49 @@ function sendPush() { const v = $('push').value.trim(); if (!v) return toast('É
 
 renderStars(); renderMeet(); renderPoll(); renderEvents(); renderArtists(); renderMe(); renderFid(); renderSub(); renderAdded(); renderPlan(); renderResa(); renderGuest(); renderContest();
 const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) go(tab);
+
+// En direct : quand le club a connecté son Instagram, un fichier « live » (posts + stories, mis à jour par l'API Meta)
+// est relu toutes les minutes : les nouveautés apparaissent sans republier l'app. Sans fichier, rien ne change.
+$('ig-acc').textContent = C.instagram;
+const LIVE_URL = C.live_url || P + 'live.json';
+let liveMaj = '';
+function applyLive(L, quiet) {
+  const first = C.posts[0] && C.posts[0][0];
+  if (L.posts && L.posts.length) {
+    C.posts = L.posts.map(([code, cap, type]) => [code, cap, type || undefined]);
+    L.posts.forEach((p, i) => { if (p[3]) LIVEIMG[i + 1] = p[3]; });
+    renderGrid((document.querySelector('#mchips .on') || {}).dataset?.k || 'all');
+    if (first && C.posts[0][0] !== first) { const a = $('grid').firstElementChild; if (a) a.classList.add('fresh'); if (!quiet) toast('Nouveau post de @' + C.instagram); }
+  }
+  if (L.stories && L.stories.length) { STORIES.splice(0, STORIES.length, ...L.stories); renderStories(); }
+  $('live-pill').hidden = false; $('ig-st').textContent = 'Connecté · en direct';
+}
+async function pollLive() {
+  if (document.hidden) return;
+  try {
+    const r = await fetch(LIVE_URL + (LIVE_URL.includes('?') ? '&' : '?') + 't=' + Date.now(), {cache: 'no-store'});
+    if (!r.ok) return;
+    const L = await r.json();
+    if (L.maj && L.maj !== liveMaj) { applyLive(L, !liveMaj); liveMaj = L.maj; }
+  } catch (e) { /* pas de fichier live : l'app garde ses données */ }
+}
+function simLive() {  // démo : montre ce qui se passe quand le club publie
+  const n = String(1 + Math.floor(Math.random() * C.posts.length));
+  const L = {maj: String(Date.now()), posts: [['demo' + Date.now(), C.court + ' · à l\'instant'], ...C.posts.map((p, i) => [...p.slice(0, 3), LIVEIMG[i + 1] || img(i + 1)])].slice(0, 12)};
+  L.posts[0][3] = img(n);
+  L.stories = [['En direct', [img(n)]], ...STORIES.filter(s => s[0] !== 'En direct')];
+  applyLive(L); liveMaj = L.maj; st.seen = (st.seen || []).filter(x => x !== 'En direct'); renderStories();
+}
+pollLive(); setInterval(pollLive, 60000);
+document.addEventListener('visibilitychange', pollLive);
+
 if (location.search.includes('test')) {
   console.assert(EVENTS.length > 0 && NEXT, 'soirées');
   console.assert(document.querySelectorAll('#grid a').length === C.posts.length, 'moments');
   console.assert(document.querySelector('.pulse-card') && document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
+  { const n0 = C.posts.length, c0 = C.posts[0][0]; simLive(); console.assert(C.posts[0][0] !== c0 && C.posts.length <= Math.max(n0, 12) && !$('live-pill').hidden && STORIES[0][0] === 'En direct', 'direct'); }
   console.log('selftest ok');
 }
 

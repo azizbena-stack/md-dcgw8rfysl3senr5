@@ -224,6 +224,12 @@ nav .dot{position:absolute;top:0;left:calc(50% + 5px);width:8px;height:8px;borde
 .pulse-card{animation:buzz 7s infinite}
 @keyframes buzz{0%,92%,100%{box-shadow:0 0 6px color-mix(in srgb,var(--a) 80%,transparent),0 0 18px color-mix(in srgb,var(--a) 40%,transparent),inset 0 0 12px color-mix(in srgb,var(--a) 30%,transparent)}94%{box-shadow:none}96%{box-shadow:0 0 10px var(--a),0 0 26px var(--a)}}
 }
+
+nav button{white-space:nowrap;overflow:hidden;text-overflow:clip;letter-spacing:-.01em}@media (max-width:380px){nav button{font-size:8.5px}nav svg{width:20px;height:20px}}header b{min-width:3.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media (max-width:380px){header .live{font-size:0;gap:0;padding:5px}header button{padding:6px 8px;font-size:11px}}header button{white-space:nowrap;flex:none}header .live{flex:none;white-space:nowrap}
+header .live{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#e0182d;border-radius:999px;padding:3px 7px}
+header .live i{width:6px;height:6px;border-radius:50%;background:#fff}
+#grid>.fresh{outline:2px solid var(--a);outline-offset:-2px}
+@media (prefers-reduced-motion:no-preference){header .live i{animation:dotp 1.2s ease-in-out infinite}#grid>.fresh{animation:pop2 .6s cubic-bezier(.2,.9,.3,1.4) both,tagp 1.5s ease-in-out 3}}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
 .hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
@@ -291,7 +297,7 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
 </head>
 <body>
 <div class="demo">Démo · maquette non officielle</div>
-<header><img class="logo" src="mia-mao-logo.jpg" alt=""><b id="h-nom"></b><button onclick="go('orga')">Espace gérant</button></header>
+<header><img class="logo" src="mia-mao-logo.jpg" alt=""><b id="h-nom"></b><span class="live" id="live-pill" hidden><i></i>En direct</span><button onclick="go('orga')">Espace gérant</button></header>
 
 <section id="home" class="on">
   <div class="hero"><img id="hero" alt=""><div class="over"><div class="k">Prochaine soirée</div><h1 id="nx-name"></h1><div class="mut" id="nx-when"></div></div></div>
@@ -478,6 +484,13 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <button class="btn ghost" style="margin-top:10px" onclick="toggleSub()" id="sub-bt"></button>
   </div>
   <div class="card">
+    <b class="u" style="font-size:13px">Instagram en direct</b>
+    <div class="row"><span>@<span id="ig-acc"></span></span><b id="ig-st">Non connecté</b></div>
+    <p class="mut">Le club se connecte une seule fois avec son compte Instagram pro. Ensuite, chaque post et chaque story publiés sur Instagram arrivent dans l'app en 1 minute environ, sans rien refaire.</p>
+    <button class="btn" style="margin-top:10px" onclick="toast('Démo : ici s\'ouvre la connexion Meta (compte Instagram pro du club)')">Connecter mon Instagram</button>
+    <button class="btn ghost" onclick="simLive()">Simuler un nouveau post (démo)</button>
+  </div>
+  <div class="card">
     <b class="u" style="font-size:13px">Ajouter une soirée</b>
     <input type="text" id="ad-nom" placeholder="Nom de la soirée" style="width:100%;margin:10px 0 8px">
     <input type="date" id="ad-date" style="width:100%;margin:0 0 8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:inherit">
@@ -530,7 +543,8 @@ const P = 'mia-mao-';
 const C = {"nom": "Mia Mao", "court": "mia mao", "ville": "Paris", "adresse": "12A rue Ella Fitzgerald, 75019 Paris", "lat": 48.893, "lon": 2.3925, "instagram": "miamao_paris", "horaires": "Jeudi, vendredi et samedi · dès 23:00", "fermeture": "07:00", "slogan": "Disconnect to connect", "niveau": "Mao addict", "apropos": "Un entrepôt de 3 000 m² remis à neuf à La Villette, au bord du canal de l'Ourcq, avec l'un des meilleurs systèmes son de Paris. Ici, pas de photo ni de vidéo : on range le téléphone et on danse.", "chiffres": [["3 000 m²", "de club"], ["3", "nuits / semaine"], ["66 k", "abonnés IG"]], "hero": "4", "rdv": ["L'entrée côté canal", "Le bar", "Face au sound system", "Le fumoir", "Le vestiaire"], "faq": [["Photos", "Mia Mao applique une politique « no photo, no video » : les caméras sont couvertes à l'entrée."], ["Âge minimum", "Club interdit aux moins de 18 ans, pièce d'identité demandée."], ["Accès", "Tram 3b Ella Fitzgerald, métro 7 Porte de la Villette ou métro 5 Porte de Pantin."]], "posts": [["Dd82o1DAI9I", "Mia Mao · 1 oct."], ["Dd9VN9FzBPM", "Mia Mao · 1 oct.", "reel"], ["DehWxk7o_HH", "Mia Mao · 15 oct.", "reel"], ["DegzRlxAPiN", "Mia Mao · 15 oct."], ["DeezppgCKRq", "Mia Mao · 14 oct."], ["DecL-rCAHIt", "Mia Mao · 13 oct."], ["DeZkdcWABSc", "Mia Mao · 12 oct.", "reel"], ["DeRrfoBMhkS", "Mia Mao · 9 oct."], ["DePbEHvozSG", "Mia Mao · 8 oct.", "reel"], ["DeO4iN5g4ki", "Mia Mao · 8 oct.", "reel"], ["DeMGKyukf58", "Mia Mao · 7 oct."], ["DeKK28EgLRc", "Mia Mao · 6 oct."]], "da": {"bg": "#050505", "card": "#111", "line": "#262626", "txt": "#f5f5f5", "mut": "#8c8c8c", "a": "#ff2d2d", "a2": "#ffffff", "glow": "0 0 18px rgba(255,45,45,.45)", "r": "2px", "fd": "Syncopate", "fdw": "700", "fdl": ".08em", "fb": "Inter", "css": ".hero h1{font-size:30px}header b{letter-spacing:.2em}"}, "soirees": [{"nom": "Ones And Zeros", "date": "2026-10-16T23:59", "prix": "20,00 €", "genres": ["Techno", "Electro"], "lineup": ["Boys Noize", "Adame Dj", "Tinkerhell"], "url": "https://shotgun.live/fr/events/ones-and-zeros-boys-noize-mia-mao", "img": "2"}, {"nom": "Raw", "date": "2026-10-17T23:59", "prix": "25,00 €", "genres": ["Techno"], "lineup": ["Roüge (all night long, A/V show)"], "url": "https://shotgun.live/fr/events/raw-rouge-all-night-long--av-show-mia-mao", "img": "3"}, {"nom": "Southern Fried Records", "date": "2026-10-22T18:00", "prix": "40,00 €", "genres": ["House"], "lineup": ["Fatboy Slim", "Shee", "Camille Doe"], "url": "https://shotgun.live/fr/events/southern-fried-records-fatboy-slim-shee-camille-doe-mia-mao", "img": "5"}, {"nom": "Check This Out", "date": "2026-10-22T23:00", "prix": "12,00 €", "genres": ["UK garage", "House"], "lineup": ["Azzecca", "Camille Doe", "Lefblom", "Nightchou"], "url": "https://shotgun.live/fr/events/check-this-out-azzecca-camille-doe-lefblom-nightchou-mia-mao", "img": "7"}, {"nom": "Thunder", "date": "2026-10-23T23:59", "prix": "9,99 €", "genres": ["Hard techno"], "lineup": ["Anderex", "Nivk", "Mxgn (Live)", "Shogun"], "url": "https://shotgun.live/fr/events/thunder-anderex-nivk-mxgn-live-shogun-heartreaver-mia-mao", "img": "8"}, {"nom": "Organïk", "date": "2026-10-24T23:59", "prix": "15,00 €", "genres": ["Hard techno"], "lineup": ["Rebekah", "Anime", "Caravel", "Aisha"], "url": "https://shotgun.live/fr/events/organik-caravel-rebekah-medusa-aisha-anime-mia-mao", "img": "9"}, {"nom": "Orka", "date": "2026-10-29T23:00", "prix": "12,00 €", "genres": ["Hard techno", "Techno"], "lineup": ["Sopik", "Night Owl", "Dj Ratz", "Keros"], "url": "https://shotgun.live/fr/events/orka-sopik-nightowl-djratz-keros-skollaris-mia-mao", "img": "11"}, {"nom": "Analog Echoes 1.0", "date": "2026-10-30T23:59", "prix": "12,00 €", "genres": ["Techno"], "lineup": ["Planetary Assault Systems", "Fjaak"], "url": "https://shotgun.live/fr/events/analog-echoes-planetary-assault-systems-fjaak-mia-mao", "img": "12"}, {"nom": "Dure Vie", "date": "2026-10-31T23:59", "prix": "16,80 €", "genres": ["Techno"], "lineup": ["Teki Latex", "Wata Igarashi", "Tasha", "Rin La Dalle"], "url": "https://shotgun.live/fr/events/dure-vie-teki-latex-wata-igarashi-tasha-rin-la-dalle-mia-mao", "img": "1"}, {"nom": "Take Hit", "date": "2026-11-05T23:00", "prix": "12,00 €", "genres": ["Techno"], "lineup": ["Debbie", "Rhadamanthe", "Kd/Ms", "Mon.To"], "url": "https://shotgun.live/fr/events/take-hit-rhadamanthe-debbie-monto-kdms-mia-mao", "img": "6"}, {"nom": "Myd Invites", "date": "2026-11-06T23:00", "prix": "16,80 €", "genres": ["Electro"], "lineup": ["Myd", "Salute", "Tsha", "Akalex"], "url": "https://shotgun.live/fr/events/myd-invites-salute-tsha-akalex-mia-mao", "img": "10"}], "billetterie": "https://shotgun.live/fr/venues/mia-mao", "tel": "", "liens": [["Shotgun", "https://shotgun.live/fr/venues/mia-mao"], ["Instagram", "https://www.instagram.com/miamao_paris/"]], "id": "mia-mao", "passees": [], "villes": [["Paris", 412], ["Seine-Saint-Denis", 118], ["Hauts-de-Seine", 96], ["Val-de-Marne", 71], ["Yvelines", 38], ["Autres", 90]], "sondage": [["Akalex", 164], ["Tsha", 131], ["Salute", 102], ["Myd", 87]]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const img = n => P + n + '.jpg';
+const LIVEIMG = {};
+const img = n => /^(https?:|data:)/.test(n) ? n : (LIVEIMG[n] || P + n + '.jpg');
 const KEY = 'club-' + C.id;
 const st = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } })();
 st.been ||= []; st.fav ||= []; st.sw ||= {};
@@ -828,12 +842,49 @@ function sendPush() { const v = $('push').value.trim(); if (!v) return toast('É
 
 renderStars(); renderMeet(); renderPoll(); renderEvents(); renderArtists(); renderMe(); renderFid(); renderSub(); renderAdded(); renderPlan(); renderResa(); renderGuest(); renderContest();
 const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) go(tab);
+
+// En direct : quand le club a connecté son Instagram, un fichier « live » (posts + stories, mis à jour par l'API Meta)
+// est relu toutes les minutes : les nouveautés apparaissent sans republier l'app. Sans fichier, rien ne change.
+$('ig-acc').textContent = C.instagram;
+const LIVE_URL = C.live_url || P + 'live.json';
+let liveMaj = '';
+function applyLive(L, quiet) {
+  const first = C.posts[0] && C.posts[0][0];
+  if (L.posts && L.posts.length) {
+    C.posts = L.posts.map(([code, cap, type]) => [code, cap, type || undefined]);
+    L.posts.forEach((p, i) => { if (p[3]) LIVEIMG[i + 1] = p[3]; });
+    renderGrid((document.querySelector('#mchips .on') || {}).dataset?.k || 'all');
+    if (first && C.posts[0][0] !== first) { const a = $('grid').firstElementChild; if (a) a.classList.add('fresh'); if (!quiet) toast('Nouveau post de @' + C.instagram); }
+  }
+  if (L.stories && L.stories.length) { STORIES.splice(0, STORIES.length, ...L.stories); renderStories(); }
+  $('live-pill').hidden = false; $('ig-st').textContent = 'Connecté · en direct';
+}
+async function pollLive() {
+  if (document.hidden) return;
+  try {
+    const r = await fetch(LIVE_URL + (LIVE_URL.includes('?') ? '&' : '?') + 't=' + Date.now(), {cache: 'no-store'});
+    if (!r.ok) return;
+    const L = await r.json();
+    if (L.maj && L.maj !== liveMaj) { applyLive(L, !liveMaj); liveMaj = L.maj; }
+  } catch (e) { /* pas de fichier live : l'app garde ses données */ }
+}
+function simLive() {  // démo : montre ce qui se passe quand le club publie
+  const n = String(1 + Math.floor(Math.random() * C.posts.length));
+  const L = {maj: String(Date.now()), posts: [['demo' + Date.now(), C.court + ' · à l\'instant'], ...C.posts.map((p, i) => [...p.slice(0, 3), LIVEIMG[i + 1] || img(i + 1)])].slice(0, 12)};
+  L.posts[0][3] = img(n);
+  L.stories = [['En direct', [img(n)]], ...STORIES.filter(s => s[0] !== 'En direct')];
+  applyLive(L); liveMaj = L.maj; st.seen = (st.seen || []).filter(x => x !== 'En direct'); renderStories();
+}
+pollLive(); setInterval(pollLive, 60000);
+document.addEventListener('visibilitychange', pollLive);
+
 if (location.search.includes('test')) {
   console.assert(EVENTS.length > 0 && NEXT, 'soirées');
   console.assert(document.querySelectorAll('#grid a').length === C.posts.length, 'moments');
   console.assert(document.querySelector('.pulse-card') && document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
+  { const n0 = C.posts.length, c0 = C.posts[0][0]; simLive(); console.assert(C.posts[0][0] !== c0 && C.posts.length <= Math.max(n0, 12) && !$('live-pill').hidden && STORIES[0][0] === 'En direct', 'direct'); }
   console.log('selftest ok');
 }
 
