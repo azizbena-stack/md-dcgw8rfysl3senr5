@@ -209,6 +209,21 @@ nav .dot{position:absolute;top:0;left:calc(50% + 5px);width:8px;height:8px;borde
 .sgrid b{position:absolute;left:12px;right:12px;bottom:28px;z-index:1;font:var(--fdw) 17px var(--fd),sans-serif;text-transform:var(--fdt);letter-spacing:var(--fdl);text-shadow:0 1px 6px #000}
 .sgrid small{position:absolute;left:12px;bottom:12px;z-index:1;font-size:11px;opacity:.85}
 .sgrid .new{position:absolute;top:16px;right:10px;z-index:1;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--a);color:var(--aon);padding:3px 7px;border-radius:999px}
+
+/* Pulse Music (comme dans Disconnect) */
+.pulse-card{display:flex;gap:14px;align-items:center;cursor:pointer;background:radial-gradient(circle at 0% 50%,color-mix(in srgb,var(--a) 25%,transparent),transparent 60%),var(--card);border:1.5px solid var(--a);box-shadow:0 0 6px color-mix(in srgb,var(--a) 80%,transparent),0 0 18px color-mix(in srgb,var(--a) 40%,transparent),inset 0 0 12px color-mix(in srgb,var(--a) 30%,transparent)}
+.pulse-ic{width:54px;height:54px;flex:none;border-radius:16px;display:grid;place-items:center;font-size:28px;background:#000;border:1.5px solid var(--a);box-shadow:var(--glow)}
+.pulse-card .go{flex:none;font-size:12px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.eqm{display:inline-flex;gap:3px;align-items:flex-end;height:16px;margin-left:6px;vertical-align:middle}
+.eqm i{width:3px;height:60%;background:var(--a);box-shadow:var(--glow)}
+.eqm i:nth-child(2){height:100%}.eqm i:nth-child(3){height:45%}.eqm i:nth-child(4){height:80%}
+#pulse-f{display:block;width:100%;height:68vh;min-height:460px;border:0;border-radius:12px;background:#000}
+@media (prefers-reduced-motion:no-preference){
+.eqm i{animation:eqb 1s ease-in-out infinite}.eqm i:nth-child(2){animation-delay:.2s}.eqm i:nth-child(3){animation-delay:.4s}.eqm i:nth-child(4){animation-delay:.1s}
+@keyframes eqb{0%,100%{height:30%}50%{height:100%}}
+.pulse-card{animation:buzz 7s infinite}
+@keyframes buzz{0%,92%,100%{box-shadow:0 0 6px color-mix(in srgb,var(--a) 80%,transparent),0 0 18px color-mix(in srgb,var(--a) 40%,transparent),inset 0 0 12px color-mix(in srgb,var(--a) 30%,transparent)}94%{box-shadow:none}96%{box-shadow:0 0 10px var(--a),0 0 26px var(--a)}}
+}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
 .hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
@@ -284,6 +299,13 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <div class="pad" style="margin-top:14px"><a class="btn" id="nx-buy" target="_blank" rel="noopener">Prendre mon billet</a></div>
   <div class="card mini" style="margin-top:12px" onclick="go('moi')"><div style="font-size:26px">🎟️</div><div style="flex:1"><b class="u" style="font-size:14px">Ma carte de fidélité</b><div class="mut" id="fid-mini"></div><div class="dots" id="fid-dots"></div></div><span class="mut">›</span></div>
   <div class="pad" style="margin:0 0 12px"><button class="btn ghost" onclick="go('vip')">Réserver une table VIP</button><button class="btn ghost" onclick="guest()" id="guest-bt">M'inscrire sur la guest list</button></div>
+  <h2>Les sons du moment</h2>
+  <div class="card pulse-card" onclick="go('pulse')">
+    <div class="pulse-ic">🎧</div>
+    <div style="flex:1"><b class="u" style="font-size:13px">Pulse Music<span class="eqm"><i></i><i></i><i></i><i></i></span></b>
+      <div class="mut">Les tops de la musique électronique : Afro House, Melodic, Deep House…</div></div>
+    <span class="go">Écouter</span>
+  </div>
   <h2>Le club</h2>
   <div class="card about" id="about"></div>
   <div class="stats" id="stats"></div>
@@ -331,6 +353,13 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <h2>Stories</h2>
   <p class="mut pad" style="margin:-4px 0 12px" id="stab-txt"></p>
   <div class="sgrid" id="sgrid"></div>
+</section>
+<section id="pulse">
+  <h2>Pulse Music<span class="eqm"><i></i><i></i><i></i><i></i></span></h2>
+  <p class="mut pad" style="margin:-4px 0 12px">Les classements de la musique électronique dans le monde : écoute les morceaux qui font danser les clubs, par genre et par pays.</p>
+  <div class="card" style="padding:6px"><iframe id="pulse-f" title="Pulse Music" allow="autoplay; encrypted-media; fullscreen"></iframe></div>
+  <div class="pad"><a class="btn" href="https://azizbena-stack.github.io/pm-pj6rrda7cpu4q1ck/" target="_blank" rel="noopener">Ouvrir Pulse Music en plein écran</a>
+  <button class="btn ghost" onclick="go('home')">Retour</button></div>
 </section>
 <section id="concours">
   <h2>Jeu concours</h2>
@@ -424,6 +453,7 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <div class="card" id="wx"><span class="mut">Chargement…</span></div>
   <h2>Raccourcis</h2>
   <div class="links">
+    <a href="#" onclick="go('pulse');return false">🎧 Pulse Music</a>
     <a href="#" onclick="go('concours');return false">Jeu concours</a>
     <a href="#" onclick="go('vip');return false">Table VIP</a>
     <a href="#" onclick="install();return false">Sur mon écran</a>
@@ -516,6 +546,7 @@ const LEVELS = [[0,'Curieux·se','Coche les soirées où tu étais.'],[1,'Initi�
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2400); }
 function go(t) {
   document.querySelectorAll('section').forEach(s => s.classList.toggle('on', s.id === t));
+  if (t === 'pulse' && !$('pulse-f').src) $('pulse-f').src = 'https://azizbena-stack.github.io/pm-pj6rrda7cpu4q1ck/';
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
   scrollTo(0, 0);
 }
@@ -800,7 +831,7 @@ const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) 
 if (location.search.includes('test')) {
   console.assert(EVENTS.length > 0 && NEXT, 'soirées');
   console.assert(document.querySelectorAll('#grid a').length === C.posts.length, 'moments');
-  console.assert(document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
+  console.assert(document.querySelector('.pulse-card') && document.querySelectorAll('nav button').length === 8 && $('sgrid').children.length === STORIES.length && $('ct-titre').textContent, 'concours');
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
   console.log('selftest ok');
