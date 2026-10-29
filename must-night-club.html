@@ -38,7 +38,7 @@ header b{font:var(--fdw) 17px var(--fd),sans-serif;letter-spacing:var(--fdl);tex
 header button{margin-left:auto;font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 10px}
 
 .hero{position:relative;height:460px;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero>img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,var(--bg) 82%)}
 .hero .over{position:absolute;left:0;right:0;bottom:12px;z-index:1;text-align:center;padding:0 16px}
 .hero .k{font:700 11px var(--fb);letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-shadow:var(--glow)}
@@ -232,7 +232,7 @@ header .live i{width:6px;height:6px;border-radius:50%;background:#fff}
 @media (prefers-reduced-motion:no-preference){header .live i{animation:dotp 1.2s ease-in-out infinite}#grid>.fresh{animation:pop2 .6s cubic-bezier(.2,.9,.3,1.4) both,tagp 1.5s ease-in-out 3}}
 /* Animations (app vivante) */
 @media (prefers-reduced-motion:no-preference){
-.hero img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
+.hero>img{animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 35%}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
 .hero .k{animation:glowk 2.4s ease-in-out infinite}
 @keyframes glowk{50%{opacity:.55;letter-spacing:.36em}}
@@ -293,16 +293,135 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
 @keyframes toastin{from{transform:translate(-50%,30px) scale(.9)}}
 #story>img{animation:kb 6s ease-out both}
 }
+
+/* Options reprises de La Churascaia */
+#splash{position:fixed;inset:0;z-index:30;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--a) 24%,var(--bg)),var(--bg) 70%);transition:opacity .6s,visibility .6s}
+#splash.off{opacity:0;visibility:hidden;pointer-events:none}
+#splash .w{text-align:center;padding:0 24px}
+#splash .rg{display:inline-block;border-radius:50%}
+#splash .lg{width:96px;height:96px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 2px var(--a),var(--glow),0 0 44px color-mix(in srgb,var(--a) 50%,transparent)}
+#splash b{display:block;margin-top:18px;font:var(--fdw) 32px/1.05 var(--fd),sans-serif;text-transform:var(--fdt);letter-spacing:var(--fdl);text-shadow:var(--glow)}
+#splash small{display:block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--a)}
+#splash .cu{display:none}
+header select{margin:0 0 0 auto;width:auto;padding:5px 6px;border-radius:999px;font-size:11px;background:transparent;flex:none}
+header select+button{margin-left:0}
+.hero .poster{display:none}
+.marq{overflow:hidden;margin:0 0 12px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq>div{display:flex;gap:8px;width:max-content;padding:0 16px}
+.marq span{font:var(--fdw) 15px var(--fd),sans-serif;text-transform:var(--fdt);letter-spacing:var(--fdl);padding:7px 12px;border:1px solid var(--line);border-radius:min(var(--r),10px);background:var(--card);white-space:nowrap}
+.marq span:nth-child(3n+1){color:var(--a2)}.marq span:nth-child(3n+2){color:var(--a)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 12px}
+.tiles button{position:relative;height:120px;border-radius:min(var(--r),18px);overflow:hidden;text-align:left;border:1px solid var(--line);background:#000}
+.tiles img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}
+.tiles button::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.82))}
+.tiles span{position:absolute;left:12px;right:10px;bottom:10px;z-index:1;font:var(--fdw) 16px/1.05 var(--fd),sans-serif;text-transform:var(--fdt);letter-spacing:var(--fdl);color:#fff;text-shadow:0 2px 8px #000}
+.how div{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.how div:last-child{border:0}
+.how b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--a);color:var(--aon);display:grid;place-items:center;font:var(--fdw) 13px var(--fd),sans-serif}
+#notif{position:fixed;left:50%;top:10px;transform:translate(-50%,-160%);width:calc(100% - 20px);max-width:460px;z-index:35;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:18px;text-align:left;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+#notif.on{transform:translate(-50%,0)}
+#notif img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
+#notif b{display:block;font-size:13px}
+#notif span{font-size:12px;color:var(--mut)}
+canvas.qr{cursor:zoom-in;transition:width .3s,height .3s}
+.ticket canvas.qr.big{width:240px;height:240px;cursor:zoom-out}
+.fid canvas.qr.big{width:150px;height:150px;cursor:zoom-out}
+.bus{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bus:last-child{border:0}
+.bus>b{font-size:19px;width:56px;flex:none;color:var(--a)}
+.bus>div{flex:1;min-width:0}
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 12px}
+.shop>div{background:var(--card);border:1px solid var(--line);border-radius:min(var(--r),18px);overflow:hidden}
+.shop .mk{position:relative;aspect-ratio:1;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--a) 38%,var(--card)),var(--card) 75%)}
+.shop .mk svg{position:absolute;left:10%;top:10%;width:80%;height:80%;fill:color-mix(in srgb,var(--bg) 82%,var(--txt));stroke:color-mix(in srgb,var(--txt) 30%,transparent);stroke-width:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+.shop .mk svg .h{fill:none;stroke:color-mix(in srgb,var(--bg) 70%,var(--txt));stroke-width:4}
+.shop .mk img{position:absolute;left:50%;width:22%;aspect-ratio:1;border-radius:50%;object-fit:cover;transform:translate(-50%,-50%)}
+.shop .in{padding:10px}
+.shop .in>b{display:block;font-size:13px;line-height:1.25}
+.shop .p{font:var(--fdw) 18px var(--fd),sans-serif;color:var(--a2)}
+.shop button{width:100%;margin-top:8px;padding:8px;border-radius:999px;border:1px solid var(--a);font-size:12px;font-weight:600}
+.shop button.on{background:var(--a);color:var(--aon)}
+
+/* Styles propres à chaque club (classes posées par fabriquer.py : même DA, mise en page différente)
+   hv = accueil, cv = cartes, nv = barre du bas, bv = fond, tv = titres, iv = intro */
+body{background:none}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
+.bv2::before{opacity:.1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bv3::before{background:linear-gradient(color-mix(in srgb,var(--txt) 6%,transparent) 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,color-mix(in srgb,var(--txt) 6%,transparent) 1px,transparent 1px) 0 0/30px 30px;-webkit-mask-image:linear-gradient(#000,transparent 80%);mask-image:linear-gradient(#000,transparent 80%)}
+.bv4::before{background:radial-gradient(55% 35% at 0% 0%,color-mix(in srgb,var(--a) 20%,transparent),transparent 70%),radial-gradient(55% 35% at 100% 100%,color-mix(in srgb,var(--a2) 16%,transparent),transparent 70%)}
+.bv5::before{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--a) 7%,transparent) 0 1px,transparent 1px 16px);-webkit-mask-image:linear-gradient(#000 10%,transparent 75%);mask-image:linear-gradient(#000 10%,transparent 75%)}
+.bv6::before{background:radial-gradient(color-mix(in srgb,var(--txt) 14%,transparent) 1px,transparent 1.5px) 0 0/18px 18px;-webkit-mask-image:radial-gradient(120% 70% at 50% 0%,#000,transparent);mask-image:radial-gradient(120% 70% at 50% 0%,#000,transparent)}
+
+.hv2 .hero{height:520px}
+.hv2 .hero>img{filter:blur(16px) brightness(.5) saturate(1.3)}
+.hv2 .hero .over::before{display:none}
+.hv2 .hero .poster{display:block;width:60%;max-width:240px;height:auto;aspect-ratio:4/5;object-fit:cover;margin:0 auto 14px;border-radius:min(var(--r),16px);border:2px solid var(--a);box-shadow:var(--glow),0 24px 50px -12px #000;transform:rotate(-2.5deg);cursor:pointer}
+.hv3 .hero{height:520px}
+.hv3 .hero::after{background:linear-gradient(90deg,var(--bg),color-mix(in srgb,var(--bg) 65%,transparent) 45%,transparent 78%),linear-gradient(transparent 55%,var(--bg) 92%)}
+.hv3 .hero>img{object-position:70% 30%}
+.hv3 .hero .over{text-align:left;bottom:24px}
+.hv3 .hero .over::before{margin:0 0 10px}
+.hv3 .hero .k{display:inline-block;padding:5px 10px;border:1px solid var(--a);border-radius:999px}
+.hv3 .hero h1{font-size:44px;line-height:.95;max-width:94%;margin-top:12px}
+.hv4 .hero{height:440px;margin:4px 12px 0;border-radius:min(calc(var(--r) + 10px),28px);border:1px solid color-mix(in srgb,var(--a) 60%,var(--line));box-shadow:var(--glow)}
+.hv4 .hero::after{background:linear-gradient(transparent 45%,color-mix(in srgb,var(--bg) 70%,transparent))}
+.hv4 .hero .over{left:10px;right:10px;bottom:10px;padding:14px;border-radius:min(var(--r),20px);background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+
+.cv2 .card,.cv2 .count div,.cv2 .stats div,.cv2 .kpi div{background:color-mix(in srgb,var(--card) 55%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:color-mix(in srgb,var(--txt) 12%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--txt) 12%,transparent)}
+.cv3 .card,.cv3 .count div,.cv3 .stats div,.cv3 .kpi div{background:color-mix(in srgb,var(--bg) 70%,transparent);border-color:color-mix(in srgb,var(--a) 55%,var(--line));box-shadow:inset 0 0 18px color-mix(in srgb,var(--a) 12%,transparent)}
+.cv4 .card,.cv4 .count div,.cv4 .kpi div{border:2px solid var(--txt);border-radius:min(var(--r),6px);box-shadow:5px 5px 0 var(--a)}
+.cv5 .card,.cv5 .count div,.cv5 .stats div,.cv5 .kpi div{background:linear-gradient(155deg,color-mix(in srgb,var(--a) 16%,var(--card)),var(--card) 58%);border-color:transparent;border-top:2px solid var(--a)}
+
+.nv2{padding-bottom:104px}
+.nv2 nav{bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100% - 20px);max-width:460px;padding:8px 4px;border:1px solid var(--line);border-radius:24px;box-shadow:0 14px 34px -10px #000,0 0 0 1px color-mix(in srgb,var(--a) 22%,transparent)}
+.nv2 #toast{bottom:108px}
+.nv3 nav button.on{color:var(--aon)}
+.nv3 nav button.on::before{content:"";position:absolute;top:-4px;bottom:-4px;left:2px;right:2px;height:auto;border-radius:14px;background:var(--a);box-shadow:var(--glow);z-index:-1}
+
+.tv2 section{counter-reset:h}
+.tv2 h2{counter-increment:h}
+.tv2 h2::before{content:counter(h,decimal-leading-zero);width:auto;height:auto;background:none;box-shadow:none;font:700 11px var(--fb),sans-serif;color:var(--a);border:1px solid var(--a);border-radius:6px;padding:2px 5px;animation:none}
+.tv3 h2::before{display:none}
+.tv3 h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--a),transparent)}
+.tv4 h2{text-decoration:underline;text-decoration-color:var(--a);text-decoration-thickness:4px;text-underline-offset:7px}
+.tv4 h2::before{width:8px;height:8px;border-radius:50%;animation:none}
+
+@media (prefers-reduced-motion:no-preference){
+.marq>div{animation:marq 45s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+.iv1 #splash .lg{animation:spz 1s cubic-bezier(.2,1.4,.4,1) both}
+.iv1 #splash b,.iv1 #splash small{animation:up .7s .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes spz{from{transform:scale(.2) rotate(-30deg);opacity:0}}
+.iv2 #splash .cu{display:block;position:absolute;top:0;bottom:0;left:0;width:50.5%;z-index:1;background:linear-gradient(90deg,var(--a),color-mix(in srgb,var(--a) 60%,#000));animation:cul .8s .5s cubic-bezier(.7,0,.3,1) forwards}
+.iv2 #splash .cu.r{left:auto;right:0;background:linear-gradient(270deg,var(--a),color-mix(in srgb,var(--a) 60%,#000));animation-name:cur}
+@keyframes cul{to{transform:translateX(-101%)}}
+@keyframes cur{to{transform:translateX(101%)}}
+.iv2 #splash .w{animation:pop .9s .6s cubic-bezier(.3,1.6,.5,1) both}
+.iv3 #splash b{animation:glitch 1.1s steps(2) both}
+.iv3 #splash .lg{animation:flick 1.1s steps(1) both}
+@keyframes glitch{0%{opacity:0;transform:translateX(-8px);text-shadow:4px 0 var(--a),-4px 0 var(--a2)}30%{opacity:1;transform:translateX(6px) skewX(-8deg);text-shadow:-5px 0 var(--a),5px 0 var(--a2)}60%{transform:translateX(-3px);text-shadow:3px 0 var(--a),-3px 0 var(--a2)}100%{transform:none}}
+@keyframes flick{0%,20%,40%{opacity:0}10%,30%,50%,100%{opacity:1}}
+.iv4 #splash .rg{padding:4px;background:conic-gradient(var(--a),var(--a2),transparent 70%,var(--a));animation:spin 1.1s linear infinite}
+.iv4 #splash .lg{border:3px solid var(--bg);animation:spin 1.1s linear infinite reverse}
+.iv4 #splash b{animation:track 1s .2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes track{from{letter-spacing:.6em;opacity:0;filter:blur(6px)}}
+.nv3 nav button.on::before{animation:pill .35s cubic-bezier(.3,1.6,.5,1)}
+.hv2 .hero .poster{animation:posterin .9s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes posterin{from{opacity:0;transform:translateY(30px) rotate(6deg) scale(.9)}}
+.bv4::before{animation:drift 12s ease-in-out infinite alternate}
+.cv3 .card:hover{box-shadow:inset 0 0 22px color-mix(in srgb,var(--a) 22%,transparent),0 0 16px -4px var(--a)}
+}
 </style>
 </head>
-<body>
+<body class="hv2 cv1 nv1 bv6 tv4 iv2">
+<div id="splash" aria-hidden="true"><i class="cu"></i><i class="cu r"></i><div class="w"><span class="rg"><img class="lg" src="must-night-club-logo.jpg" alt=""></span><b id="sp-nom"></b><small id="sp-ville"></small></div></div>
 <div class="demo">Démo · maquette non officielle</div>
-<header><img class="logo" src="must-night-club-logo.jpg" alt=""><b id="h-nom"></b><span class="live" id="live-pill" hidden><i></i>En direct</span><button onclick="go('orga')">Espace gérant</button></header>
+<header><img class="logo" src="must-night-club-logo.jpg" alt=""><b id="h-nom"></b><span class="live" id="live-pill" hidden><i></i>En direct</span><select id="lang" aria-label="Langue" onchange="setLang(this.value)"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option></select><button onclick="go('orga')">Gérant</button></header>
 
 <section id="home" class="on">
-  <div class="hero"><img id="hero" alt=""><div class="over"><div class="k">Prochaine soirée</div><h1 id="nx-name"></h1><div class="mut" id="nx-when"></div></div></div>
+  <div class="hero"><img id="hero" alt=""><div class="over"><img class="poster" id="nx-poster" alt="Affiche de la soirée" loading="lazy" onclick="go('events')"><div class="k">Prochaine soirée</div><h1 id="nx-name"></h1><div class="mut" id="nx-when"></div></div></div>
   <div class="count" id="count"></div>
-  <div class="pad" style="margin-top:14px"><a class="btn" id="nx-buy" target="_blank" rel="noopener">Prendre mon billet</a></div>
+  <div class="pad" style="margin-top:14px"><a class="btn" id="nx-buy" target="_blank" rel="noopener">Prendre mon billet</a><button class="btn ghost" onclick="ics()">Ajouter à mon agenda</button></div>
   <div class="card mini" style="margin-top:12px" onclick="go('moi')"><div style="font-size:26px">🎟️</div><div style="flex:1"><b class="u" style="font-size:14px">Ma carte de fidélité</b><div class="mut" id="fid-mini"></div><div class="dots" id="fid-dots"></div></div><span class="mut">›</span></div>
   <div class="pad" style="margin:0 0 12px"><button class="btn ghost" onclick="go('vip')">Réserver une table VIP</button><button class="btn ghost" onclick="guest()" id="guest-bt">M'inscrire sur la guest list</button></div>
   <h2>Les sons du moment</h2>
@@ -315,6 +434,14 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <h2>Le club</h2>
   <div class="card about" id="about"></div>
   <div class="stats" id="stats"></div>
+  <div id="legend-b"><h2>Ils sont passés</h2><div class="marq"><div id="legend"></div></div></div>
+  <h2>Explorer</h2>
+  <div class="tiles">
+    <button onclick="go('shop')"><img id="tl-1" alt="" loading="lazy"><span>La boutique</span></button>
+    <button onclick="go('priv')"><img id="tl-2" alt="" loading="lazy"><span>Privatiser le club</span></button>
+    <button onclick="go('moments')"><img id="tl-3" alt="" loading="lazy"><span>Moments</span></button>
+    <button onclick="go('concours')"><img id="tl-4" alt="" loading="lazy"><span>Jeu concours</span></button>
+  </div>
   <h2>Qui pour la prochaine ?</h2>
   <div class="card poll" id="poll"></div>
   <h2>Nous suivre</h2>
@@ -359,6 +486,15 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <h2>Stories</h2>
   <p class="mut pad" style="margin:-4px 0 12px" id="stab-txt"></p>
   <div class="sgrid" id="sgrid"></div>
+  <div class="card row" style="padding:12px 16px;margin-top:12px"><span>Me prévenir à chaque nouvelle story</span><button class="sw" data-k="story" aria-label="Me prévenir à chaque nouvelle story"></button></div>
+  <h2>Comment ça marche</h2>
+  <div class="card how">
+    <div><b>1</b><span>Le gérant publie sa story sur Instagram, comme d'habitude. Rien de plus à faire.</span></div>
+    <div><b>2</b><span>L'app la récupère toute seule, en moins de 2 minutes.</span></div>
+    <div><b>3</b><span>Les clients la voient ici et reçoivent une notification.</span></div>
+    <div><b>4</b><span>Elle disparaît au bout de 24 h, comme sur Instagram.</span></div>
+  </div>
+  <div class="pad"><button class="btn ghost" onclick="simStory()">▶ Démo : simuler une story du gérant</button></div>
 </section>
 <section id="pulse">
   <h2>Pulse Music<span class="eqm"><i></i><i></i><i></i><i></i></span></h2>
@@ -393,9 +529,11 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <div class="u" style="font-size:11px;color:var(--a);letter-spacing:.25em" id="tk-club"></div>
     <div class="u" style="font-size:20px;margin-top:6px" id="tk-ev"></div>
     <div class="mut" id="tk-when"></div>
-    <canvas id="qr" width="29" height="29"></canvas>
-    <div class="mut">Billet de démonstration · <span id="tk-name">Invité·e</span></div>
+    <canvas class="qr" id="qr" width="29" height="29" onclick="this.classList.toggle('big')"></canvas>
+    <div class="mut"><span>Billet de démonstration</span> · <span id="tk-name">Invité·e</span></div>
+    <div class="mut" style="font-size:11px;margin-top:4px">Touche le QR pour l'agrandir.</div>
   </div>
+  <div class="pad" style="margin-bottom:12px"><button class="btn ghost" onclick="toast('Wallet : dans la version officielle')">Ajouter au Wallet</button><button class="btn ghost" onclick="ics()">Ajouter à mon agenda</button></div>
   <div class="card">
     <b class="u" style="font-size:13px">Pas encore de billet ?</b>
     <p class="mut" style="margin:6px 0 12px">Si c'est complet, inscris-toi : une place libérée, et tu es prévenu·e en premier.</p>
@@ -405,6 +543,11 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <h2>Programme</h2>
   <p class="mut pad" style="margin:-4px 0 10px">Horaires indicatifs (démo) : le club les annonce sur Instagram.</p>
   <div class="tl" id="tl"></div>
+  <h2>Navette</h2>
+  <div class="card">
+    <p class="mut" style="margin-bottom:6px">Rentre sans prendre le volant. Départs, prix et places d'exemple (démo).</p>
+    <div id="bus"></div>
+  </div>
   <h2 id="meteo-t">Météo</h2>
   <div class="card" id="meteo"><span class="mut">Chargement…</span></div>
   <h2>Y aller</h2>
@@ -442,6 +585,29 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <div class="pad"><button class="btn ghost" onclick="go('home')">Retour</button></div>
 </section>
 
+<section id="shop">
+  <h2>La boutique</h2>
+  <p class="mut pad" style="margin:-4px 0 12px">Articles et prix d'exemple (démo) : le club met les siens. Réserve ici, récupère au vestiaire.</p>
+  <div class="shop" id="shop-list"></div>
+  <div class="pad"><button class="btn ghost" onclick="go('home')">Retour</button></div>
+</section>
+
+<section id="priv">
+  <h2>Privatiser le club</h2>
+  <div class="card prize"><img id="pv-img" alt="" loading="lazy"><div class="in"><b class="u" style="font-size:15px">Un lieu unique pour votre soirée</b><p class="mut" style="margin-top:6px">Anniversaire, soirée d'entreprise, mariage : privatisez tout ou partie du club, avec le son, la lumière et l'équipe.</p></div></div>
+  <div class="card">
+    <b class="u" style="font-size:13px">Demande de devis</b>
+    <input type="text" id="pv-nom" placeholder="Votre nom" autocomplete="name" style="width:100%;margin:10px 0 8px">
+    <input type="text" id="pv-tel" placeholder="Votre téléphone" autocomplete="tel" inputmode="tel" style="width:100%;margin:0 0 8px">
+    <select id="pv-type" aria-label="Objet de la demande"><option>Anniversaire</option><option>Soirée d'entreprise</option><option>Mariage</option><option>Autre événement</option></select>
+    <input type="date" id="pv-date" aria-label="Date souhaitée" style="width:100%;margin:0 0 10px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:inherit">
+    <div class="step"><span>Invités</span><span style="display:flex;align-items:center;gap:12px"><button onclick="pvN(-10)" aria-label="Moins">−</button><b id="pv-n">80</b><button onclick="pvN(10)" aria-label="Plus">+</button></span></div>
+    <button class="btn" onclick="sendPriv()">Envoyer ma demande</button>
+    <p class="mut" style="margin-top:8px;text-align:center">Démo : rien n'est envoyé. En vrai, la demande arrive au club.</p>
+  </div>
+  <div class="pad"><a class="btn ghost" id="pv-call">Appeler le club</a><button class="btn ghost" onclick="go('home')">Retour</button></div>
+</section>
+
 <section id="moi">
   <h2>Mon profil</h2>
   <input type="text" id="name" placeholder="Ton prénom" oninput="setName(this.value)">
@@ -449,11 +615,18 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <div class="fid">
     <div class="top"><img src="must-night-club-logo.jpg" alt=""><div><b id="fid-club"></b><span class="mut" id="fid-name"></span></div><span class="no" id="fid-no"></span></div>
     <div class="stamps" id="stamps"></div>
-    <canvas id="fid-qr" width="21" height="21"></canvas>
+    <canvas class="qr" id="fid-qr" width="21" height="21" onclick="this.classList.toggle('big')"></canvas>
     <div class="mut" id="fid-txt"></div>
+    <div style="clear:both"></div>
   </div>
   <div class="card" id="rewards"></div>
-  <div class="pad" style="margin-bottom:6px"><button class="btn" onclick="stamp()">Faire tamponner ma carte</button><p class="mut" style="margin-top:8px;text-align:center">Démo : en vrai, le staff scanne ton QR à l'entrée.</p></div>
+  <div class="pad" style="margin-bottom:6px"><button class="btn" onclick="stamp()">Faire tamponner ma carte</button><button class="btn ghost" onclick="toast('Wallet : dans la version officielle')">Ajouter au Wallet</button><p class="mut" style="margin-top:8px;text-align:center">Démo : en vrai, le staff scanne ton QR à l'entrée.</p></div>
+  <h2>Parrainage</h2>
+  <div class="card">
+    <p class="mut">Invite un pote : à sa première soirée, vous gagnez chacun un tampon.</p>
+    <div class="row"><span>Mon code</span><b class="u" id="ref-code" style="font-size:20px;letter-spacing:.1em"></b></div>
+    <button class="btn ghost" onclick="refer()">Envoyer mon code</button>
+  </div>
   <div class="card" id="me-sum"></div>
   <h2 id="wx-t">Météo</h2>
   <div class="card" id="wx"><span class="mut">Chargement…</span></div>
@@ -462,6 +635,9 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <a href="#" onclick="go('pulse');return false">🎧 Pulse Music</a>
     <a href="#" onclick="go('concours');return false">Jeu concours</a>
     <a href="#" onclick="go('vip');return false">Table VIP</a>
+    <a href="#" onclick="go('shop');return false">Boutique</a>
+    <a href="#" onclick="go('priv');return false">Privatiser</a>
+    <a href="#" onclick="ics();return false">Mon agenda</a>
     <a href="#" onclick="install();return false">Sur mon écran</a>
   </div>
   <h2>Réglages</h2>
@@ -499,9 +675,20 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <div id="ad-list"></div>
   </div>
   <div class="card">
-    <b class="u" style="font-size:13px">Réservations VIP</b>
+    <b class="u" style="font-size:13px">Réservations</b>
     <div id="g-resa"></div>
     <div class="row"><span>Guest list (prochaine soirée)</span><b id="g-guest"></b></div>
+    <div class="row"><span>Demandes de privatisation</span><b id="g-priv"></b></div>
+    <div class="row"><span>Boutique : à retirer au vestiaire</span><b id="g-shop"></b></div>
+    <div class="row"><span>Navette : places réservées</span><b id="g-bus"></b></div>
+  </div>
+  <div class="card">
+    <b class="u" style="font-size:13px">Stories Instagram</b>
+    <div class="row"><span>Stories en ligne</span><b id="g-live"></b></div>
+    <div class="row"><span>Vues dans l'app (24 h)</span><b>1 362</b></div>
+    <input type="text" id="sim-txt" placeholder="Texte de la story (facultatif)" style="width:100%;margin:10px 0">
+    <button class="btn" onclick="simStory()">Publier une story (simulation)</button>
+    <p class="mut" style="margin-top:8px">En vrai : le gérant publie sur Instagram, l'app la reprend toute seule.</p>
   </div>
   <div class="card">
     <b class="u" style="font-size:13px">Carte de fidélité</b>
@@ -509,6 +696,7 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
     <button class="btn ghost" style="margin-top:10px" onclick="toast('Scanner : dans la version officielle')">Tamponner une carte (scanner)</button>
   </div>
   <div class="card"><b class="u" style="font-size:13px">D'où vient le public</b><div id="cities"></div></div>
+  <div class="card"><b class="u" style="font-size:13px">Âge du public</b><div id="ages"></div></div>
   <div class="card"><b class="u" style="font-size:13px">Artistes les plus attendus</b><div id="wanted"></div></div>
   <div class="card">
     <b class="u" style="font-size:13px">Notification</b>
@@ -537,10 +725,11 @@ nav .dot{animation:dotp 1.6s ease-in-out infinite}
   <div class="ft" id="st-ft"></div>
 </div>
 <div id="toast"></div>
+<button id="notif" onclick="openNotif()"><img src="must-night-club-logo.jpg" alt=""><div><b id="nt-t"></b><span>Touche pour la regarder</span></div></button>
 
 <script>
 const P = 'must-night-club-';
-const C = {"nom": "Must Night Club", "court": "MUST", "ville": "Bayonne", "adresse": "6 chemin de Hayet, 64100 Bayonne", "instagram": "must__nightclub", "horaires": "Jeudi au samedi · 23h – 6h", "fermeture": "06:00", "slogan": "Tropical, afro, shatta, urbain", "niveau": "Must Have", "apropos": "L'ex-Before Basque devenu le Must : tropical, afro, shatta et urbain du jeudi au samedi, showcases (Vegedream avec NRJ) et navette gratuite.", "chiffres": [["3", "soirs / semaine"], ["Navette", "gratuite"], ["6,5 k", "abonnés IG"]], "hero": "10", "rdv": ["Chemin de Hayet", "La navette", "Le bar", "Le carré VIP", "Le vestiaire"], "faq": [["Navette gratuite", "06 26 17 19 61."], ["Âge minimum", "Club réservé aux majeurs."]], "da": {"bg": "#080706", "card": "#15120e", "line": "#30291f", "txt": "#fbf6ec", "mut": "#ada28f", "a": "#e3b04b", "a2": "#ff5a36", "aon": "#1a1206", "glow": "0 0 18px #e3b04b66", "r": "12px", "fd": "Exo 2", "fdw": "800", "fdt": "uppercase", "fdl": ".03em", "fb": "Inter", "css": ".logo{background:#000}"}, "soirees": [{"nom": "Jeudi au Must", "date": "2026-10-22T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "7"}, {"nom": "Vendredi au Must", "date": "2026-10-23T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "9"}, {"nom": "Samedi au Must", "date": "2026-10-24T23:00", "prix": "", "genres": ["Afro", "Urbain"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "10"}, {"nom": "Jeudi au Must", "date": "2026-10-29T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "11"}, {"nom": "Vendredi au Must", "date": "2026-10-30T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "12"}, {"nom": "Halloween Afro Tropikal Mix · One Time Pouwé", "date": "2026-10-31T23:00", "prix": "15 € avec conso", "genres": ["Afro", "Tropical", "Halloween"], "lineup": ["One Time Pouwé", "DJ K-Lo", "DJ Salazar"], "url": "https://www.instagram.com/p/DeozwLCsGkc/", "img": "1"}, {"nom": "Jeudi au Must", "date": "2026-11-05T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "7"}, {"nom": "Vendredi au Must", "date": "2026-11-06T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "9"}, {"nom": "Samedi au Must", "date": "2026-11-07T23:00", "prix": "", "genres": ["Afro", "Urbain"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "10"}], "passees": [{"nom": "Showcase Vegedream · NRJ", "date": "2026-10-17T23:00", "genres": ["Afro", "Urbain"], "lineup": ["Vegedream", "Shaily", "DJ Nals", "DJ You Ri"], "img": "6"}, {"nom": "Soirée tech", "date": "2026-10-16T23:00", "genres": ["Tech"], "lineup": ["Loov"], "img": "8"}], "ilsontjoue": ["Vegedream", "Mael Goude", "DJ Nals"], "lat": 43.49292, "lon": -1.4512, "villes": [["Bayonne", 322], ["Anglet", 88], ["Biarritz", 69], ["Boucau", 41], ["Dax", 34], ["Autres", 96]], "posts": [["DYkqYHVNWGH", "Must · 20 mai", "reel"], ["Da28U-ztUls", "Must · 16 juil."], ["DT5uX6zDyQI", "Must · 24 janv."], ["DerxytpDUBp", "Must · 19 oct."], ["DejhbonN8jk", "Must · 16 oct.", "reel"], ["DefLq_kNrIa", "Must · 14 oct.", "reel"], ["DeeOVv7jTgo", "Must · 14 oct."], ["DeZzZ_VDiJ4", "Must · 12 oct."], ["DeM1Lfhu3Z3", "Must · 7 oct.", "reel"], ["DeHwR4GDv9n", "Must · 5 oct."], ["DeBztnfDhUH", "Must · 3 oct."], ["Dd1tNdsjqjM", "Must · 28 sept."]], "tel": "", "liens": [], "hebdo": {"3": ["Jeudi au Must", ["Afro", "Tropical"], "23:00"], "4": ["Vendredi au Must", ["Urbain", "Shatta"], "23:00"], "5": ["Samedi au Must", ["Afro", "Urbain"], "23:00"]}, "hebdo_img": ["7", "9", "10", "11", "12"], "id": "must-night-club", "live_url": "https://ysrenidrdyiafnfhpfpg.supabase.co/storage/v1/object/public/clubs-live/must-night-club.json", "billetterie": "https://www.instagram.com/must__nightclub/", "sondage": [["Mael Goude", 164], ["Loov", 131], ["DJ You Ri", 102], ["DJ Nals", 87]]};
+const C = {"nom": "Must Night Club", "court": "MUST", "ville": "Bayonne", "adresse": "6 chemin de Hayet, 64100 Bayonne", "instagram": "must__nightclub", "horaires": "Jeudi au samedi · 23h – 6h", "fermeture": "06:00", "slogan": "Tropical, afro, shatta, urbain", "niveau": "Must Have", "apropos": "L'ex-Before Basque devenu le Must : tropical, afro, shatta et urbain du jeudi au samedi, showcases (Vegedream avec NRJ) et navette gratuite.", "chiffres": [["3", "soirs / semaine"], ["Navette", "gratuite"], ["6,5 k", "abonnés IG"]], "hero": "10", "rdv": ["Chemin de Hayet", "La navette", "Le bar", "Le carré VIP", "Le vestiaire"], "faq": [["Navette gratuite", "06 26 17 19 61."], ["Âge minimum", "Club réservé aux majeurs."]], "da": {"bg": "#080706", "card": "#15120e", "line": "#30291f", "txt": "#fbf6ec", "mut": "#ada28f", "a": "#e3b04b", "a2": "#ff5a36", "aon": "#1a1206", "glow": "0 0 18px #e3b04b66", "r": "12px", "fd": "Exo 2", "fdw": "800", "fdt": "uppercase", "fdl": ".03em", "fb": "Inter", "css": ".logo{background:#000}"}, "soirees": [{"nom": "Jeudi au Must", "date": "2026-10-29T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "7"}, {"nom": "Vendredi au Must", "date": "2026-10-30T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "9"}, {"nom": "Halloween Afro Tropikal Mix · One Time Pouwé", "date": "2026-10-31T23:00", "prix": "15 € avec conso", "genres": ["Afro", "Tropical", "Halloween"], "lineup": ["One Time Pouwé", "DJ K-Lo", "DJ Salazar"], "url": "https://www.instagram.com/p/DeozwLCsGkc/", "img": "1"}, {"nom": "Jeudi au Must", "date": "2026-11-05T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "10"}, {"nom": "Vendredi au Must", "date": "2026-11-06T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "11"}, {"nom": "Samedi au Must", "date": "2026-11-07T23:00", "prix": "", "genres": ["Afro", "Urbain"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "12"}, {"nom": "Jeudi au Must", "date": "2026-11-12T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "7"}, {"nom": "Vendredi au Must", "date": "2026-11-13T23:00", "prix": "", "genres": ["Urbain", "Shatta"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "9"}, {"nom": "Samedi au Must", "date": "2026-11-14T23:00", "prix": "", "genres": ["Afro", "Urbain"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "10"}, {"nom": "Jeudi au Must", "date": "2026-11-19T23:00", "prix": "", "genres": ["Afro", "Tropical"], "lineup": [], "url": "https://www.instagram.com/must__nightclub/", "img": "11"}], "passees": [{"nom": "Showcase Vegedream · NRJ", "date": "2026-10-17T23:00", "genres": ["Afro", "Urbain"], "lineup": ["Vegedream", "Shaily", "DJ Nals", "DJ You Ri"], "img": "6"}, {"nom": "Soirée tech", "date": "2026-10-16T23:00", "genres": ["Tech"], "lineup": ["Loov"], "img": "8"}], "ilsontjoue": ["Vegedream", "Mael Goude", "DJ Nals"], "lat": 43.49292, "lon": -1.4512, "villes": [["Bayonne", 322], ["Anglet", 88], ["Biarritz", 69], ["Boucau", 41], ["Dax", 34], ["Autres", 96]], "posts": [["DYkqYHVNWGH", "Must · 20 mai", "reel"], ["Da28U-ztUls", "Must · 16 juil."], ["DT5uX6zDyQI", "Must · 24 janv."], ["DerxytpDUBp", "Must · 19 oct."], ["DejhbonN8jk", "Must · 16 oct.", "reel"], ["DefLq_kNrIa", "Must · 14 oct.", "reel"], ["DeeOVv7jTgo", "Must · 14 oct."], ["DeZzZ_VDiJ4", "Must · 12 oct."], ["DeM1Lfhu3Z3", "Must · 7 oct.", "reel"], ["DeHwR4GDv9n", "Must · 5 oct."], ["DeBztnfDhUH", "Must · 3 oct."], ["Dd1tNdsjqjM", "Must · 28 sept."]], "tel": "", "liens": [], "hebdo": {"3": ["Jeudi au Must", ["Afro", "Tropical"], "23:00"], "4": ["Vendredi au Must", ["Urbain", "Shatta"], "23:00"], "5": ["Samedi au Must", ["Afro", "Urbain"], "23:00"]}, "hebdo_img": ["7", "9", "10", "11", "12"], "id": "must-night-club", "style": "hv2 cv1 nv1 bv6 tv4 iv2", "live_url": "https://ysrenidrdyiafnfhpfpg.supabase.co/storage/v1/object/public/clubs-live/must-night-club.json", "billetterie": "https://www.instagram.com/must__nightclub/", "sondage": [["Mael Goude", 164], ["Loov", 131], ["DJ You Ri", 102], ["DJ Nals", 87]]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LIVEIMG = {};
@@ -549,7 +738,182 @@ const KEY = 'club-' + C.id;
 const st = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } })();
 st.been ||= []; st.fav ||= []; st.sw ||= {};
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} };
-const fmt = (d, o) => new Date(d).toLocaleDateString('fr-FR', o);
+
+// Langues (comme La Churascaia) : l'app est écrite en français, traduite à l'affichage. Une ligne = [fr, en, es, de].
+// Les textes propres au club (présentation, noms des soirées) restent en français.
+const LANGS = ['fr', 'en', 'es', 'de'], LOC = {fr: 'fr-FR', en: 'en-GB', es: 'es-ES', de: 'de-DE'};
+const LANG = LANGS.includes(st.lang) ? st.lang : LANGS.find(l => (navigator.language || '').startsWith(l)) || 'fr';
+const TXT = [
+  ['Démo · maquette non officielle', 'Demo · unofficial mock-up', 'Demo · maqueta no oficial', 'Demo · inoffizielles Modell'],
+  ['En direct', 'Live', 'En directo', 'Live'], ['Gérant', 'Manager', 'Gerente', 'Betreiber'], ['Langue', 'Language', 'Idioma', 'Sprache'],
+  ['Accueil', 'Home', 'Inicio', 'Start'], ['Stories', 'Stories', 'Stories', 'Stories'], ['Soirées', 'Nights', 'Fiestas', 'Partys'], ['Moments', 'Moments', 'Momentos', 'Momente'],
+  ['Concours', 'Contest', 'Concurso', 'Verlosung'], ['Jour J', 'D-Day', 'Día D', 'Tag X'], ['Moi', 'Me', 'Yo', 'Ich'],
+  ['Prochaine soirée', 'Next night', 'Próxima fiesta', 'Nächste Party'], ['Affiche de la soirée', 'Event poster', 'Cartel de la fiesta', 'Party-Plakat'],
+  ['jours', 'days', 'días', 'Tage'], ['heures', 'hours', 'horas', 'Std.'], ['min', 'min', 'min', 'Min.'], ['sec', 'sec', 'seg', 'Sek.'],
+  ['Prendre mon billet', 'Get my ticket', 'Comprar mi entrada', 'Ticket holen'], ['Ajouter à mon agenda', 'Add to my calendar', 'Añadir a mi calendario', 'In meinen Kalender'],
+  ['Ma carte de fidélité', 'My loyalty card', 'Mi tarjeta de fidelidad', 'Meine Treuekarte'], ['Réserver une table VIP', 'Book a VIP table', 'Reservar una mesa VIP', 'VIP-Tisch reservieren'],
+  ['M\'inscrire sur la guest list', 'Join the guest list', 'Apuntarme en la guest list', 'Auf die Gästeliste'], ['Retiré·e de la guest list', 'Removed from the guest list', 'Quitado de la guest list', 'Von der Gästeliste entfernt'],
+  ['Les sons du moment', 'Sounds of the moment', 'Los sonidos del momento', 'Die Sounds der Stunde'], ['Écouter', 'Listen', 'Escuchar', 'Anhören'],
+  ['Les tops de la musique électronique : Afro House, Melodic, Deep House…', 'The top electronic music charts: Afro House, Melodic, Deep House…', 'Lo más escuchado de la música electrónica: Afro House, Melodic, Deep House…', 'Die Top-Charts der elektronischen Musik: Afro House, Melodic, Deep House…'],
+  ['Le club', 'The club', 'El club', 'Der Club'], ['Ils sont passés', 'They played here', 'Pasaron por aquí', 'Sie waren schon hier'], ['Explorer', 'Explore', 'Explorar', 'Entdecken'],
+  ['La boutique', 'The shop', 'La tienda', 'Der Shop'], ['Privatiser le club', 'Book the whole club', 'Privatizar el club', 'Club mieten'], ['Jeu concours', 'Contest', 'Concurso', 'Gewinnspiel'],
+  ['Qui pour la prochaine ?', 'Who\'s next?', '¿Quién para la próxima?', 'Wer als Nächstes?'], ['Nous suivre', 'Follow us', 'Síguenos', 'Folge uns'], ['Partager', 'Share', 'Compartir', 'Teilen'], ['Site', 'Website', 'Web', 'Website'],
+  ['Vote pour l\'artiste que tu veux voir au club', 'Vote for the artist you want to see at the club', 'Vota por el artista que quieres ver en el club', 'Stimm für den Act, den du im Club sehen willst'],
+  ['Vote pour la prochaine soirée à thème', 'Vote for the next theme night', 'Vota por la próxima fiesta temática', 'Stimm für die nächste Mottoparty'],
+  ['Années 2000', '2000s', 'Años 2000', '2000er'], ['Latino / reggaeton', 'Latin / reggaeton', 'Latino / reguetón', 'Latino / Reggaeton'], ['Vote enregistré', 'Vote saved', 'Voto guardado', 'Stimme gespeichert'], ['Lien copié', 'Link copied', 'Enlace copiado', 'Link kopiert'],
+  ['Mon passeport', 'My passport', 'Mi pasaporte', 'Mein Pass'], ['À venir', 'Coming up', 'Próximamente', 'Demnächst'], ['Note la dernière nuit', 'Rate last night', 'Puntúa la última noche', 'Bewerte die letzte Nacht'],
+  ['Un mot sur la soirée ?', 'A word about the night?', '¿Algo sobre la fiesta?', 'Ein Wort zur Party?'], ['Envoyer mon avis', 'Send my review', 'Enviar mi opinión', 'Bewertung senden'], ['Déjà vécues', 'Been there', 'Ya vividas', 'Schon erlebt'],
+  ['Coche « J\'y étais » pour faire grimper ton niveau.', 'Tick “I was there” to level up.', 'Marca «Yo estuve» para subir de nivel.', 'Hake „Ich war da“ an, um aufzusteigen.'],
+  ['J\'y étais', 'I was there', 'Yo estuve', 'Ich war da'], ['Billets', 'Tickets', 'Entradas', 'Tickets'], ['Line-up bientôt dévoilé', 'Line-up coming soon', 'Line-up pronto', 'Line-up folgt'], ['Nouvelles dates bientôt.', 'New dates soon.', 'Nuevas fechas pronto.', 'Bald neue Termine.'],
+  ['Curieux·se', 'Curious', 'Curioso/a', 'Neugierig'], ['Initié·e', 'Insider', 'Iniciado/a', 'Eingeweiht'], ['Habitué·e', 'Regular', 'Habitual', 'Stammgast'], ['Pilier du club', 'Club legend', 'Pilar del club', 'Club-Urgestein'],
+  ['Coche les soirées où tu étais.', 'Tick the nights you went to.', 'Marca las fiestas en las que estuviste.', 'Hake die Partys an, auf denen du warst.'], ['Bienvenue dans la famille.', 'Welcome to the family.', 'Bienvenido/a a la familia.', 'Willkommen in der Familie.'],
+  ['Tu connais le chemin par cœur.', 'You know the way by heart.', 'Te sabes el camino de memoria.', 'Du kennst den Weg auswendig.'], ['Tu fais partie des murs.', 'You\'re part of the furniture.', 'Ya eres parte del local.', 'Du gehörst zum Inventar.'],
+  ['Line-up', 'Line-up', 'Line-up', 'Line-up'], ['Chercher un artiste…', 'Search an artist…', 'Buscar un artista…', 'Künstler suchen…'], ['Tous', 'All', 'Todos', 'Alle'], ['★ Favoris', '★ Favourites', '★ Favoritos', '★ Favoriten'],
+  ['Aucun artiste.', 'No artist.', 'Ningún artista.', 'Kein Künstler.'], ['Déjà passé·e au club', 'Already played the club', 'Ya pasó por el club', 'War schon im Club'], ['Favori', 'Favourite', 'Favorito', 'Favorit'],
+  ['Tout', 'All', 'Todo', 'Alle'], ['Photos', 'Photos', 'Fotos', 'Fotos'], ['▶ Vidéos', '▶ Videos', '▶ Vídeos', '▶ Videos'], ['Pas encore de vidéo.', 'No video yet.', 'Aún no hay vídeos.', 'Noch kein Video.'],
+  ['Vidéos', 'Videos', 'Vídeos', 'Videos'], ['Coulisses', 'Backstage', 'Entre bastidores', 'Backstage'], ['Souvenirs', 'Memories', 'Recuerdos', 'Erinnerungen'], ['Nouveau', 'New', 'Nuevo', 'Neu'], ['1 story', '1 story', '1 story', '1 Story'],
+  ['Me prévenir à chaque nouvelle story', 'Notify me of every new story', 'Avisarme de cada nueva story', 'Bei jeder neuen Story benachrichtigen'], ['Comment ça marche', 'How it works', 'Cómo funciona', 'So funktioniert\'s'],
+  ['Le gérant publie sa story sur Instagram, comme d\'habitude. Rien de plus à faire.', 'The manager posts the story on Instagram as usual. Nothing else to do.', 'El gerente publica su story en Instagram, como siempre. Nada más que hacer.', 'Der Betreiber postet die Story wie gewohnt auf Instagram. Sonst nichts zu tun.'],
+  ['L\'app la récupère toute seule, en moins de 2 minutes.', 'The app picks it up on its own, in under 2 minutes.', 'La app la recoge sola, en menos de 2 minutos.', 'Die App holt sie sich selbst, in unter 2 Minuten.'],
+  ['Les clients la voient ici et reçoivent une notification.', 'Customers see it here and get a notification.', 'Los clientes la ven aquí y reciben una notificación.', 'Die Gäste sehen sie hier und bekommen eine Benachrichtigung.'],
+  ['Elle disparaît au bout de 24 h, comme sur Instagram.', 'It disappears after 24 h, just like on Instagram.', 'Desaparece a las 24 h, como en Instagram.', 'Sie verschwindet nach 24 h, wie auf Instagram.'],
+  ['▶ Démo : simuler une story du gérant', '▶ Demo: simulate a manager story', '▶ Demo: simular una story del gerente', '▶ Demo: Story des Betreibers simulieren'], ['Touche pour la regarder', 'Tap to watch it', 'Toca para verla', 'Tippe zum Ansehen'],
+  ['Story publiée sur Instagram (simulation)…', 'Story posted on Instagram (simulation)…', 'Story publicada en Instagram (simulación)…', 'Story auf Instagram gepostet (Simulation)…'], ['à l\'instant', 'just now', 'ahora mismo', 'gerade eben'],
+  ['Pulse Music', 'Pulse Music', 'Pulse Music', 'Pulse Music'], ['Ouvrir Pulse Music en plein écran', 'Open Pulse Music full screen', 'Abrir Pulse Music en pantalla completa', 'Pulse Music im Vollbild öffnen'], ['Retour', 'Back', 'Volver', 'Zurück'],
+  ['Les classements de la musique électronique dans le monde : écoute les morceaux qui font danser les clubs, par genre et par pays.', 'Electronic music charts worldwide: listen to the tracks that make clubs dance, by genre and country.', 'Las listas de música electrónica del mundo: escucha los temas que hacen bailar a los clubs, por género y país.', 'Die Charts der elektronischen Musik weltweit: Hör die Tracks, die die Clubs tanzen lassen, nach Genre und Land.'],
+  ['À gagner', 'To win', 'Premio', 'Zu gewinnen'], ['Je participe', 'Enter', 'Participo', 'Ich mache mit'], ['Inviter un pote (+1 chance)', 'Invite a friend (+1 chance)', 'Invitar a un amigo (+1 oportunidad)', 'Freund einladen (+1 Chance)'],
+  ['Concours fictif (démo). Le vrai règlement est fourni par le club.', 'Fictional contest (demo). The real rules are provided by the club.', 'Concurso ficticio (demo). Las bases reales las da el club.', 'Fiktives Gewinnspiel (Demo). Die echten Regeln stellt der Club.'],
+  ['1. Je participe', '1. I enter', '1. Participo', '1. Ich mache mit'], ['1 chance', '1 chance', '1 oportunidad', '1 Chance'], ['2. J\'invite mes potes', '2. I invite my friends', '2. Invito a mis amigos', '2. Ich lade Freunde ein'],
+  ['+1 chance par pote', '+1 chance per friend', '+1 oportunidad por amigo', '+1 Chance pro Freund'], ['3. Tirage au sort', '3. Prize draw', '3. Sorteo', '3. Verlosung'], ['résultat dans l\'app', 'result in the app', 'resultado en la app', 'Ergebnis in der App'],
+  ['✓ Inscrit·e au tirage', '✓ Entered in the draw', '✓ Inscrito/a en el sorteo', '✓ Bei der Verlosung dabei'], ['Tirage effectué', 'Draw done', 'Sorteo realizado', 'Verlosung erfolgt'], ['Tu es déjà inscrit·e', 'You\'re already in', 'Ya estás inscrito/a', 'Du bist schon dabei'],
+  ['Inscrit·e ! Bonne chance 🍀', 'You\'re in! Good luck 🍀', '¡Inscrito/a! Buena suerte 🍀', 'Dabei! Viel Glück 🍀'], ['+1 chance au tirage', '+1 chance in the draw', '+1 oportunidad en el sorteo', '+1 Chance bei der Verlosung'],
+  ['Mon billet', 'My ticket', 'Mi entrada', 'Mein Ticket'], ['Billet de démonstration', 'Demo ticket', 'Entrada de demostración', 'Demo-Ticket'], ['Invité·e', 'Guest', 'Invitado/a', 'Gast'], ['Touche le QR pour l\'agrandir.', 'Tap the QR to enlarge it.', 'Toca el QR para ampliarlo.', 'Tippe auf den QR, um ihn zu vergrößern.'],
+  ['Ajouter au Wallet', 'Add to Wallet', 'Añadir a Wallet', 'Zu Wallet hinzufügen'], ['Wallet : dans la version officielle', 'Wallet: in the official version', 'Wallet: en la versión oficial', 'Wallet: in der offiziellen Version'],
+  ['Pas encore de billet ?', 'No ticket yet?', '¿Aún sin entrada?', 'Noch kein Ticket?'], ['Si c\'est complet, inscris-toi : une place libérée, et tu es prévenu·e en premier.', 'If it\'s sold out, sign up: as soon as a spot frees up, you\'re the first to know.', 'Si está completo, apúntate: si se libera una plaza, serás el primero en saberlo.', 'Ausverkauft? Trag dich ein: Wird ein Platz frei, erfährst du es zuerst.'],
+  ['Liste d\'attente', 'Waiting list', 'Lista de espera', 'Warteliste'], ['✓ Sur la liste d\'attente', '✓ On the waiting list', '✓ En la lista de espera', '✓ Auf der Warteliste'], ['Tu seras prévenu·e si une place se libère', 'You\'ll be told if a spot frees up', 'Te avisaremos si se libera una plaza', 'Du wirst benachrichtigt, wenn ein Platz frei wird'], ['Retiré·e de la liste', 'Removed from the list', 'Quitado/a de la lista', 'Von der Liste entfernt'],
+  ['Table VIP & plan de salle', 'VIP table & floor plan', 'Mesa VIP y plano', 'VIP-Tisch & Raumplan'], ['Programme', 'Schedule', 'Programa', 'Programm'], ['Horaires indicatifs (démo) : le club les annonce sur Instagram.', 'Indicative times (demo): the club announces them on Instagram.', 'Horarios orientativos (demo): el club los anuncia en Instagram.', 'Ungefähre Zeiten (Demo): Der Club gibt sie auf Instagram bekannt.'],
+  ['Ouverture des portes', 'Doors open', 'Apertura de puertas', 'Einlass'], ['Fermeture', 'Closing', 'Cierre', 'Schluss'], ['en ce moment', 'now playing', 'ahora', 'gerade'],
+  ['Navette', 'Shuttle', 'Lanzadera', 'Shuttle'], ['Rentre sans prendre le volant. Départs, prix et places d\'exemple (démo).', 'Get home without driving. Sample departures, prices and seats (demo).', 'Vuelve sin conducir. Salidas, precios y plazas de ejemplo (demo).', 'Komm ohne Auto nach Hause. Abfahrten, Preise und Plätze als Beispiel (Demo).'],
+  ['Réserver', 'Book', 'Reservar', 'Buchen'], ['✓ Réservé', '✓ Booked', '✓ Reservado', '✓ Gebucht'], ['Réservation annulée', 'Booking cancelled', 'Reserva cancelada', 'Buchung storniert'],
+  ['Centre-ville', 'City centre', 'Centro', 'Innenstadt'], ['Campus universitaire', 'University campus', 'Campus universitario', 'Uni-Campus'], ['Parking relais', 'Park & ride', 'Aparcamiento disuasorio', 'Park & Ride'],
+  ['Météo', 'Weather', 'El tiempo', 'Wetter'], ['Chargement…', 'Loading…', 'Cargando…', 'Lädt…'], ['Aujourd\'hui', 'Today', 'Hoy', 'Heute'], ['Auj.', 'Today', 'Hoy', 'Heute'], ['Météo indisponible hors ligne.', 'Weather unavailable offline.', 'Tiempo no disponible sin conexión.', 'Wetter offline nicht verfügbar.'],
+  ['Prévoir une veste pour la sortie : le vestiaire est là pour ça.', 'Bring a jacket for later: that\'s what the cloakroom is for.', 'Lleva una chaqueta para la salida: para eso está el guardarropa.', 'Nimm eine Jacke mit: Dafür gibt\'s die Garderobe.'],
+  ['Y aller', 'Getting there', 'Cómo llegar', 'Anfahrt'], ['Horaires', 'Opening hours', 'Horario', 'Öffnungszeiten'], ['Réservation', 'Booking', 'Reservas', 'Reservierung'], ['Itinéraire', 'Directions', 'Cómo llegar', 'Route'],
+  ['Voir l\'Instagram du club', 'See the club\'s Instagram', 'Ver el Instagram del club', 'Siehe Instagram des Clubs'],
+  ['Retrouver ma bande', 'Find my crew', 'Encontrar a mi grupo', 'Meine Crew finden'], ['Choisis un point de rendez-vous et envoie-le à tes potes.', 'Pick a meeting point and send it to your friends.', 'Elige un punto de encuentro y envíaselo a tus amigos.', 'Wähle einen Treffpunkt und schick ihn deinen Freunden.'],
+  ['Envoyer à ma bande', 'Send to my crew', 'Enviar a mi grupo', 'An meine Crew senden'], ['L\'entrée', 'The entrance', 'La entrada', 'Der Eingang'], ['Le bar', 'The bar', 'La barra', 'Die Bar'], ['Devant les platines', 'In front of the decks', 'Delante de los platos', 'Vor dem DJ-Pult'],
+  ['Le fumoir', 'The smoking area', 'La zona de fumadores', 'Der Raucherbereich'], ['Le vestiaire', 'The cloakroom', 'El guardarropa', 'Die Garderobe'], ['Message copié, colle-le à ta bande', 'Message copied, paste it to your crew', 'Mensaje copiado, pégalo a tu grupo', 'Nachricht kopiert, schick sie deiner Crew'],
+  ['Infos pratiques', 'Practical info', 'Información práctica', 'Praktische Infos'], ['Âge minimum', 'Minimum age', 'Edad mínima', 'Mindestalter'], ['Le club est réservé aux majeurs. Une pièce d\'identité peut être demandée à l\'entrée.', 'The club is 18+ only. ID may be requested at the door.', 'El club es solo para mayores de edad. Pueden pedir el DNI en la entrada.', 'Der Club ist ab 18. Am Eingang kann ein Ausweis verlangt werden.'],
+  ['Besoin d\'aide ?', 'Need help?', '¿Necesitas ayuda?', 'Brauchst du Hilfe?'], ['Un souci sur place ? Va voir la sécurité à l\'entrée, ou appelle les secours.', 'A problem on site? Go to security at the entrance, or call emergency services.', '¿Un problema? Ve a seguridad en la entrada o llama a emergencias.', 'Ein Problem vor Ort? Geh zur Security am Eingang oder ruf den Notruf.'], ['Appeler le 112', 'Call 112', 'Llamar al 112', '112 anrufen'],
+  ['Réserver une table', 'Book a table', 'Reservar una mesa', 'Tisch reservieren'], ['Choisis ta table sur le plan, puis envoie ta demande. Plan et prix d\'exemple (démo) : le club met les siens.', 'Pick your table on the plan, then send your request. Sample plan and prices (demo): the club puts its own.', 'Elige tu mesa en el plano y envía tu solicitud. Plano y precios de ejemplo (demo): el club pone los suyos.', 'Wähle deinen Tisch im Plan und sende deine Anfrage. Beispielplan und -preise (Demo): Der Club setzt seine eigenen ein.'],
+  ['Table', 'Table', 'Mesa', 'Tisch'], ['Carré VIP', 'VIP area', 'Zona VIP', 'VIP-Bereich'], ['Déjà réservée', 'Already booked', 'Ya reservada', 'Schon reserviert'], ['Table choisie', 'Chosen table', 'Mesa elegida', 'Gewählter Tisch'], ['Personnes', 'People', 'Personas', 'Personen'],
+  ['Un anniversaire ? Une demande ?', 'A birthday? A request?', '¿Un cumpleaños? ¿Una petición?', 'Ein Geburtstag? Ein Wunsch?'], ['Envoyer ma demande', 'Send my request', 'Enviar mi solicitud', 'Anfrage senden'], ['Le club te confirme par message (démo : rien n\'est envoyé).', 'The club confirms by message (demo: nothing is sent).', 'El club te confirma por mensaje (demo: no se envía nada).', 'Der Club bestätigt per Nachricht (Demo: nichts wird gesendet).'],
+  ['Mes réservations', 'My bookings', 'Mis reservas', 'Meine Reservierungen'], ['Aucune réservation pour l\'instant.', 'No booking yet.', 'Aún no hay reservas.', 'Noch keine Reservierung.'], ['En attente de confirmation', 'Awaiting confirmation', 'Pendiente de confirmación', 'Wartet auf Bestätigung'],
+  ['Choisis une table sur le plan', 'Pick a table on the plan', 'Elige una mesa en el plano', 'Wähle einen Tisch im Plan'], ['Demande envoyée (démo) ✓', 'Request sent (demo) ✓', 'Solicitud enviada (demo) ✓', 'Anfrage gesendet (Demo) ✓'],
+  ['Table · 1 bouteille', 'Table · 1 bottle', 'Mesa · 1 botella', 'Tisch · 1 Flasche'], ['Carré VIP · 2 bouteilles', 'VIP area · 2 bottles', 'Zona VIP · 2 botellas', 'VIP-Bereich · 2 Flaschen'], ['Pack anniversaire', 'Birthday pack', 'Pack cumpleaños', 'Geburtstagspaket'],
+  ['gâteau + bouteille + cierges', 'cake + bottle + sparklers', 'tarta + botella + bengalas', 'Kuchen + Flasche + Wunderkerzen'], ['Champagne', 'Champagne', 'Champán', 'Champagner'],
+  ['Platines · DJ', 'Decks · DJ', 'Cabina · DJ', 'DJ-Pult'], ['Dance floor', 'Dance floor', 'Pista', 'Tanzfläche'], ['Bar', 'Bar', 'Barra', 'Bar'], ['Soirée', 'Night', 'Fiesta', 'Party'], ['Formule', 'Package', 'Fórmula', 'Paket'], ['Moins', 'Less', 'Menos', 'Weniger'], ['Plus', 'More', 'Más', 'Mehr'],
+  ['La boutique', 'The shop', 'La tienda', 'Der Shop'], ['Articles et prix d\'exemple (démo) : le club met les siens. Réserve ici, récupère au vestiaire.', 'Sample items and prices (demo): the club puts its own. Reserve here, pick up at the cloakroom.', 'Artículos y precios de ejemplo (demo): el club pone los suyos. Reserva aquí y recógelo en el guardarropa.', 'Beispielartikel und -preise (Demo): Der Club setzt seine eigenen ein. Hier reservieren, an der Garderobe abholen.'],
+  ['T-shirt logo', 'Logo T-shirt', 'Camiseta con logo', 'Logo-T-Shirt'], ['Sweat à capuche', 'Hoodie', 'Sudadera con capucha', 'Kapuzenpulli'], ['Casquette', 'Cap', 'Gorra', 'Cap'], ['Tote bag', 'Tote bag', 'Tote bag', 'Stoffbeutel'],
+  ['Réserver au vestiaire', 'Reserve at the cloakroom', 'Reservar en el guardarropa', 'An der Garderobe reservieren'], ['✓ Réservé au vestiaire', '✓ Reserved at the cloakroom', '✓ Reservado en el guardarropa', '✓ An der Garderobe reserviert'],
+  ['Un lieu unique pour votre soirée', 'A unique venue for your event', 'Un lugar único para tu fiesta', 'Ein einzigartiger Ort für deine Party'], ['Anniversaire, soirée d\'entreprise, mariage : privatisez tout ou partie du club, avec le son, la lumière et l\'équipe.', 'Birthday, company party, wedding: book all or part of the club, with sound, lights and staff.', 'Cumpleaños, fiesta de empresa, boda: privatiza todo o parte del club, con sonido, luces y equipo.', 'Geburtstag, Firmenfeier, Hochzeit: Miete den ganzen Club oder einen Teil, mit Sound, Licht und Team.'],
+  ['Demande de devis', 'Quote request', 'Solicitud de presupuesto', 'Angebotsanfrage'], ['Votre nom', 'Your name', 'Tu nombre', 'Dein Name'], ['Votre téléphone', 'Your phone', 'Tu teléfono', 'Deine Telefonnummer'], ['Objet de la demande', 'Type of request', 'Motivo', 'Anlass'],
+  ['Anniversaire', 'Birthday', 'Cumpleaños', 'Geburtstag'], ['Soirée d\'entreprise', 'Company party', 'Fiesta de empresa', 'Firmenfeier'], ['Mariage', 'Wedding', 'Boda', 'Hochzeit'], ['Autre événement', 'Other event', 'Otro evento', 'Anderes Event'], ['Date souhaitée', 'Preferred date', 'Fecha deseada', 'Wunschdatum'],
+  ['Invités', 'Guests', 'Invitados', 'Gäste'], ['Démo : rien n\'est envoyé. En vrai, la demande arrive au club.', 'Demo: nothing is sent. For real, the request goes to the club.', 'Demo: no se envía nada. En la real, la solicitud llega al club.', 'Demo: Nichts wird gesendet. In echt geht die Anfrage an den Club.'],
+  ['Appeler le club', 'Call the club', 'Llamar al club', 'Club anrufen'], ['Écrire au club sur Instagram', 'Message the club on Instagram', 'Escribir al club por Instagram', 'Dem Club auf Instagram schreiben'],
+  ['Ça commence à se remplir 🔥', 'It\'s filling up 🔥', 'Se está llenando 🔥', 'Es wird voll 🔥'], ['Ce soir au club 🪩', 'Tonight at the club 🪩', 'Esta noche en el club 🪩', 'Heute Abend im Club 🪩'], ['On vous attend ✨', 'We\'re waiting for you ✨', 'Os esperamos ✨', 'Wir warten auf euch ✨'], ['L\'équipe est prête ❤️‍🔥', 'The team is ready ❤️‍🔥', 'El equipo está listo ❤️‍🔥', 'Das Team ist bereit ❤️‍🔥'], ['Nom et date obligatoires', 'Name and date required', 'Nombre y fecha obligatorios', 'Name und Datum erforderlich'],
+  ['Mon profil', 'My profile', 'Mi perfil', 'Mein Profil'], ['Ton prénom', 'Your first name', 'Tu nombre', 'Dein Vorname'], ['Carte de fidélité', 'Loyalty card', 'Tarjeta de fidelidad', 'Treuekarte'], ['Membre', 'Member', 'Miembro', 'Mitglied'],
+  ['Faire tamponner ma carte', 'Get my card stamped', 'Sellar mi tarjeta', 'Karte stempeln lassen'], ['Démo : en vrai, le staff scanne ton QR à l\'entrée.', 'Demo: for real, staff scan your QR at the door.', 'Demo: en la real, el personal escanea tu QR en la entrada.', 'Demo: In echt scannt das Team deinen QR am Eingang.'],
+  ['Récompenses (exemples)', 'Rewards (examples)', 'Recompensas (ejemplos)', 'Prämien (Beispiele)'], ['Vestiaire offert', 'Free cloakroom', 'Guardarropa gratis', 'Garderobe gratis'], ['Une conso offerte', 'A free drink', 'Una consumición gratis', 'Ein Gratisgetränk'], ['Une entrée offerte', 'A free entry', 'Una entrada gratis', 'Ein Gratiseintritt'],
+  ['Carte complète !', 'Card complete!', '¡Tarjeta completa!', 'Karte voll!'], ['Tampon ajouté ★', 'Stamp added ★', 'Sello añadido ★', 'Stempel hinzugefügt ★'],
+  ['Parrainage', 'Referral', 'Invita a un amigo', 'Freunde werben'], ['Invite un pote : à sa première soirée, vous gagnez chacun un tampon.', 'Invite a friend: at their first night, you each earn a stamp.', 'Invita a un amigo: en su primera fiesta, ganáis un sello cada uno.', 'Lade einen Freund ein: Bei seiner ersten Party bekommt ihr beide einen Stempel.'],
+  ['Mon code', 'My code', 'Mi código', 'Mein Code'], ['Envoyer mon code', 'Send my code', 'Enviar mi código', 'Meinen Code senden'], ['Niveau', 'Level', 'Nivel', 'Level'], ['Soirées vécues', 'Nights attended', 'Fiestas vividas', 'Erlebte Partys'], ['Artistes favoris', 'Favourite artists', 'Artistas favoritos', 'Lieblingskünstler'],
+  ['Raccourcis', 'Shortcuts', 'Accesos directos', 'Shortcuts'], ['Table VIP', 'VIP table', 'Mesa VIP', 'VIP-Tisch'], ['Boutique', 'Shop', 'Tienda', 'Shop'], ['Privatiser', 'Private hire', 'Privatizar', 'Mieten'], ['Mon agenda', 'My calendar', 'Mi calendario', 'Mein Kalender'], ['Sur mon écran', 'On my home screen', 'En mi pantalla', 'Auf den Homescreen'],
+  ['Réglages', 'Settings', 'Ajustes', 'Einstellungen'], ['Nouvelles soirées', 'New nights', 'Nuevas fiestas', 'Neue Partys'], ['Mes artistes favoris', 'My favourite artists', 'Mis artistas favoritos', 'Meine Lieblingskünstler'], ['Rappel le jour J', 'Reminder on the day', 'Recordatorio el día D', 'Erinnerung am Tag X'],
+  ['Activé', 'On', 'Activado', 'An'], ['Désactivé', 'Off', 'Desactivado', 'Aus'], ['Mettre l\'app sur mon écran', 'Add the app to my home screen', 'Poner la app en mi pantalla', 'App auf den Homescreen'], ['Effacer mes données', 'Delete my data', 'Borrar mis datos', 'Meine Daten löschen'],
+  ['Effacer ton passeport, tes favoris et tes réglages ?', 'Delete your passport, favourites and settings?', '¿Borrar tu pasaporte, favoritos y ajustes?', 'Pass, Favoriten und Einstellungen löschen?'], ['Choisis une note', 'Pick a rating', 'Elige una nota', 'Wähle eine Note'], ['Merci pour ton avis', 'Thanks for your review', 'Gracias por tu opinión', 'Danke für deine Bewertung'],
+  ['Safari : Partager ⬆️ puis « Sur l\'écran d\'accueil »', 'Safari: Share ⬆️ then “Add to Home Screen”', 'Safari: Compartir ⬆️ y luego «Añadir a pantalla de inicio»', 'Safari: Teilen ⬆️, dann „Zum Home-Bildschirm“'], ['Menu ⋮ puis « Ajouter à l\'écran d\'accueil »', 'Menu ⋮ then “Add to Home screen”', 'Menú ⋮ y luego «Añadir a pantalla de inicio»', 'Menü ⋮, dann „Zum Startbildschirm hinzufügen“'],
+  ['Espace gérant', 'Manager area', 'Espacio del gerente', 'Betreiberbereich'], ['Chiffres fictifs pour la démo.', 'Fictional figures for the demo.', 'Cifras ficticias para la demo.', 'Fiktive Zahlen für die Demo.'], ['Abonnement', 'Subscription', 'Suscripción', 'Abo'],
+  ['29 € / mois', '€29 / month', '29 € / mes', '29 € / Monat'], ['(exemple de tarif)', '(sample price)', '(precio de ejemplo)', '(Beispielpreis)'], ['Les clients utilisent l\'app gratuitement, seul le club s\'abonne.', 'Customers use the app for free, only the club subscribes.', 'Los clientes usan la app gratis, solo el club se suscribe.', 'Die Gäste nutzen die App gratis, nur der Club zahlt ein Abo.'],
+  ['Actif', 'Active', 'Activa', 'Aktiv'], ['Impayé', 'Unpaid', 'Impagada', 'Unbezahlt'], ['Simuler un impayé', 'Simulate an unpaid bill', 'Simular un impago', 'Zahlungsausfall simulieren'], ['Réactiver l\'abonnement', 'Reactivate the subscription', 'Reactivar la suscripción', 'Abo reaktivieren'],
+  ['Instagram en direct', 'Live Instagram', 'Instagram en directo', 'Instagram live'], ['Non connecté', 'Not connected', 'No conectado', 'Nicht verbunden'], ['Connecté · en direct', 'Connected · live', 'Conectado · en directo', 'Verbunden · live'],
+  ['Le club se connecte une seule fois avec son compte Instagram pro. Ensuite, chaque post et chaque story publiés sur Instagram arrivent dans l\'app en 1 minute environ, sans rien refaire.', 'The club connects its pro Instagram account once. After that, every post and story published on Instagram shows up in the app in about a minute, with nothing else to do.', 'El club se conecta una sola vez con su cuenta pro de Instagram. Después, cada post y cada story publicados llegan a la app en un minuto, sin hacer nada más.', 'Der Club verbindet sein Instagram-Profikonto ein einziges Mal. Danach landet jeder Post und jede Story in etwa einer Minute in der App, ohne weiteres Zutun.'],
+  ['Connecter mon Instagram', 'Connect my Instagram', 'Conectar mi Instagram', 'Mein Instagram verbinden'], ['Simuler un nouveau post (démo)', 'Simulate a new post (demo)', 'Simular un nuevo post (demo)', 'Neuen Post simulieren (Demo)'],
+  ['Démo : ici s\'ouvre la connexion Meta (compte Instagram pro du club)', 'Demo: the Meta login opens here (club\'s pro Instagram account)', 'Demo: aquí se abre el acceso a Meta (cuenta pro de Instagram del club)', 'Demo: Hier öffnet sich der Meta-Login (Instagram-Profikonto des Clubs)'],
+  ['Ajouter une soirée', 'Add a night', 'Añadir una fiesta', 'Party hinzufügen'], ['Nom de la soirée', 'Name of the night', 'Nombre de la fiesta', 'Name der Party'], ['Artistes, séparés par une virgule', 'Artists, separated by commas', 'Artistas, separados por comas', 'Künstler, durch Komma getrennt'], ['Ajouter la soirée', 'Add the night', 'Añadir la fiesta', 'Party hinzufügen'], ['Supprimer', 'Delete', 'Eliminar', 'Löschen'], ['Ajoutée', 'Added', 'Añadida', 'Hinzugefügt'],
+  ['Réservations', 'Bookings', 'Reservas', 'Reservierungen'], ['Guest list (prochaine soirée)', 'Guest list (next night)', 'Guest list (próxima fiesta)', 'Gästeliste (nächste Party)'], ['Demandes de privatisation', 'Private hire requests', 'Solicitudes de privatización', 'Mietanfragen'],
+  ['Boutique : à retirer au vestiaire', 'Shop: to collect at the cloakroom', 'Tienda: para recoger en el guardarropa', 'Shop: an der Garderobe abzuholen'], ['Navette : places réservées', 'Shuttle: seats booked', 'Lanzadera: plazas reservadas', 'Shuttle: gebuchte Plätze'],
+  ['Stories Instagram', 'Instagram stories', 'Stories de Instagram', 'Instagram-Stories'], ['Stories en ligne', 'Stories online', 'Stories en línea', 'Stories online'], ['Vues dans l\'app (24 h)', 'Views in the app (24 h)', 'Vistas en la app (24 h)', 'Aufrufe in der App (24 h)'],
+  ['Texte de la story (facultatif)', 'Story text (optional)', 'Texto de la story (opcional)', 'Story-Text (optional)'], ['Publier une story (simulation)', 'Post a story (simulation)', 'Publicar una story (simulación)', 'Story posten (Simulation)'], ['En vrai : le gérant publie sur Instagram, l\'app la reprend toute seule.', 'For real: the manager posts on Instagram, the app picks it up on its own.', 'En la real: el gerente publica en Instagram y la app la recoge sola.', 'In echt: Der Betreiber postet auf Instagram, die App übernimmt sie selbst.'],
+  ['Cartes actives', 'Active cards', 'Tarjetas activas', 'Aktive Karten'], ['Tampons cette semaine', 'Stamps this week', 'Sellos esta semana', 'Stempel diese Woche'], ['Récompenses données', 'Rewards given', 'Recompensas dadas', 'Vergebene Prämien'],
+  ['Tamponner une carte (scanner)', 'Stamp a card (scanner)', 'Sellar una tarjeta (escáner)', 'Karte stempeln (Scanner)'], ['Scanner : dans la version officielle', 'Scanner: in the official version', 'Escáner: en la versión oficial', 'Scanner: in der offiziellen Version'],
+  ['D\'où vient le public', 'Where the crowd comes from', 'De dónde viene el público', 'Woher das Publikum kommt'], ['Âge du public', 'Crowd age', 'Edad del público', 'Alter des Publikums'], ['Artistes les plus attendus', 'Most wanted artists', 'Artistas más esperados', 'Meistgewünschte Künstler'],
+  ['Notification', 'Notification', 'Notificación', 'Benachrichtigung'], ['Ex : Last call, plus que 50 places !', 'E.g. Last call, only 50 spots left!', 'Ej.: ¡Última llamada, solo quedan 50 plazas!', 'z. B. Last Call, nur noch 50 Plätze!'], ['Envoyer aux abonnés', 'Send to subscribers', 'Enviar a los suscriptores', 'An Abonnenten senden'], ['Scanner les billets', 'Scan tickets', 'Escanear entradas', 'Tickets scannen'],
+  ['Écris un message', 'Write a message', 'Escribe un mensaje', 'Schreib eine Nachricht'], ['Envoyé (démo)', 'Sent (demo)', 'Enviado (demo)', 'Gesendet (Demo)'], ['abonnés à l\'app', 'app subscribers', 'suscriptores de la app', 'App-Abonnenten'], ['note moyenne', 'average rating', 'nota media', 'Durchschnittsnote'], ['reviennent le mois suivant', 'come back the next month', 'vuelven el mes siguiente', 'kommen im Folgemonat wieder'],
+  ['Agglomération', 'Metro area', 'Área metropolitana', 'Umland'], ['Département', 'County', 'Provincia', 'Landkreis'], ['Région', 'Region', 'Región', 'Region'], ['Autres', 'Others', 'Otros', 'Andere'], ['35 ans et +', '35 and over', '35 años y más', '35 und älter'],
+  ['Application suspendue', 'App suspended', 'App suspendida', 'App gesperrt'], ['L\'abonnement du club est inactif (simulation). Tout revient dès que le gérant le réactive.', 'The club\'s subscription is inactive (simulation). Everything comes back once the manager reactivates it.', 'La suscripción del club está inactiva (simulación). Todo vuelve cuando el gerente la reactive.', 'Das Abo des Clubs ist inaktiv (Simulation). Alles kommt zurück, sobald der Betreiber es reaktiviert.'],
+  ['Réactiver (démo)', 'Reactivate (demo)', 'Reactivar (demo)', 'Reaktivieren (Demo)'], ['Story', 'Story', 'Story', 'Story'], ['Précédente', 'Previous', 'Anterior', 'Zurück'], ['Suivante', 'Next', 'Siguiente', 'Weiter'], ['Fermer', 'Close', 'Cerrar', 'Schließen'],
+];
+const pl = (n, a, b) => +n > 1 ? b : a;
+const trC = r => tr(r[0].toUpperCase() + r.slice(1)); // traduit un texte écrit en minuscule
+const RX = [ // textes avec un nombre ou un nom dedans
+  [/^(\d+) stories$/, n => n + ' stories'],
+  [/^(.*?) ?Encore (\d+) pour « (.+) »\.$/, (a, n, b) => [tr(a), {en: `${n} more for “${tr(b)}”.`, es: `${n} más para «${tr(b)}».`, de: `Noch ${n} bis „${tr(b)}“.`}[LANG]].filter(Boolean).join(' ')],
+  [/^Encore (\d+) tampons? pour : (.+)\.$/, (n, r) => ({en: `${n} more ${pl(n, 'stamp', 'stamps')} for: ${trC(r).toLowerCase()}.`, es: `${n} ${pl(n, 'sello', 'sellos')} más para: ${trC(r).toLowerCase()}.`, de: `Noch ${n} Stempel bis: ${trC(r)}.`}[LANG])],
+  [/^(\d+) \/ 10 tampons$/, n => ({en: `${n} / 10 stamps`, es: `${n} / 10 sellos`, de: `${n} / 10 Stempel`}[LANG])],
+  [/^(.+) à (\d+)$/, (r, n) => ({en: `${trC(r).toLowerCase()} at ${n}`, es: `${trC(r).toLowerCase()} con ${n}`, de: `${trC(r)} ab ${n}`}[LANG])],
+  [/^(\d+) tampons$/, n => ({en: `${n} stamps`, es: `${n} sellos`, de: `${n} Stempel`}[LANG])],
+  [/^🎁 Récompense débloquée : (.+)$/, r => ({en: '🎁 Reward unlocked: ', es: '🎁 Recompensa desbloqueada: ', de: '🎁 Prämie freigeschaltet: '}[LANG]) + tr(r)],
+  [/^Tirage dans (\d+) jours?$/, n => ({en: `Draw in ${n} ${pl(n, 'day', 'days')}`, es: `Sorteo en ${n} ${pl(n, 'día', 'días')}`, de: `Verlosung in ${n} ${pl(n, 'Tag', 'Tagen')}`}[LANG])],
+  [/^tu as (\d+) chances?$/, n => ({en: `you have ${n} ${pl(n, 'chance', 'chances')}`, es: `tienes ${n} ${pl(n, 'oportunidad', 'oportunidades')}`, de: `du hast ${n} ${pl(n, 'Chance', 'Chancen')}`}[LANG])],
+  [/^Tirage au sort le (.+) à 18h\. Bonus : chaque pote invité = 1 chance de plus\.$/, d => ({en: `Draw on ${d} at 6pm. Bonus: each friend you invite = 1 more chance.`, es: `Sorteo el ${d} a las 18:00. Extra: cada amigo invitado = 1 oportunidad más.`, de: `Verlosung am ${d} um 18 Uhr. Bonus: Jeder eingeladene Freund = 1 Chance mehr.`}[LANG])],
+  [/^2 places pour (.+)$/, a => ({en: '2 tickets for ', es: '2 entradas para ', de: '2 Tickets für '}[LANG]) + a],
+  [/^(\d+) places$/, n => ({en: `${n} seats`, es: `${n} plazas`, de: `${n} Plätze`}[LANG])],
+  [/^retour (.+)$/, h => ({en: 'back ', es: 'vuelta ', de: 'zurück '}[LANG]) + h],
+  [/^Place réservée · départ (\S+) · (.+)$/, (h, v) => ({en: `Seat booked · departs ${h} · `, es: `Plaza reservada · salida ${h} · `, de: `Platz gebucht · Abfahrt ${h} · `}[LANG]) + tr(v)],
+  [/^Gare de (.+)$/, v => ({en: v + ' station', es: 'Estación de ' + v, de: 'Bahnhof ' + v}[LANG])],
+  [/^Météo à (.+)$/, v => ({en: 'Weather in ', es: 'El tiempo en ', de: 'Wetter in '}[LANG]) + v],
+  [/^vent (\d+) km\/h$/, n => ({en: `wind ${n} km/h`, es: `viento ${n} km/h`, de: `Wind ${n} km/h`}[LANG])],
+  [/^(\d) sur 5$/, n => ({en: `${n} out of 5`, es: `${n} de 5`, de: `${n} von 5`}[LANG])],
+  [/^(\d+) inscrits$/, n => ({en: `${n} signed up`, es: `${n} inscritos`, de: `${n} angemeldet`}[LANG])],
+  [/^(\d+) pers\.$/, n => ({en: `${n} ppl`, es: `${n} pers.`, de: `${n} Pers.`}[LANG])],
+  [/^(\d+)-(\d+) ans$/, (a, b) => ({en: `${a}-${b}`, es: `${a}-${b} años`, de: `${a}-${b} J.`}[LANG])],
+  [/^Tu es sur la guest list : (.+)$/, e => ({en: 'You\'re on the guest list: ', es: 'Estás en la guest list: ', de: 'Du stehst auf der Gästeliste: '}[LANG]) + e],
+  [/^✓ Sur la guest list · (.+)$/, e => ({en: '✓ On the guest list · ', es: '✓ En la guest list · ', de: '✓ Auf der Gästeliste · '}[LANG]) + e],
+  [/^(.+) a publié une story$/, c => c + ({en: ' posted a story', es: ' publicó una story', de: ' hat eine Story gepostet'}[LANG])],
+  [/^(.+) réservé au vestiaire$/, a => tr(a) + ({en: ' reserved at the cloakroom', es: ' reservado en el guardarropa', de: ' an der Garderobe reserviert'}[LANG])],
+  [/^Demande envoyée : (.+), (\d+) invités$/, (t, n) => ({en: 'Request sent: ', es: 'Solicitud enviada: ', de: 'Anfrage gesendet: '}[LANG]) + tr(t).toLowerCase() + ', ' + n + ' ' + tr('Invités').toLowerCase()],
+  [/^(.+) \(votes fictifs\)\.$/, q => tr(q) + ({en: ' (fictional votes).', es: ' (votos ficticios).', de: ' (fiktive Stimmen).'}[LANG])],
+  [/^(.+) \(exemple\)$/, a => tr(a) + ({en: ' (example)', es: ' (ejemplo)', de: ' (Beispiel)'}[LANG])],
+  [/^Nouveau post de (.+)$/, a => ({en: 'New post from ', es: 'Nuevo post de ', de: 'Neuer Post von '}[LANG]) + a],
+  [/^Les dernières publications de (@\S+)\. Touche une photo pour l'ouvrir sur Instagram\.$/, a => ({en: `Latest posts from ${a}. Tap a photo to open it on Instagram.`, es: `Las últimas publicaciones de ${a}. Toca una foto para abrirla en Instagram.`, de: `Die neuesten Posts von ${a}. Tippe auf ein Foto, um es auf Instagram zu öffnen.`}[LANG])],
+  [/^Les stories de (@\S+)\. Touche une story pour la regarder en plein écran\.$/, a => ({en: `Stories from ${a}. Tap a story to watch it full screen.`, es: `Las stories de ${a}. Toca una story para verla en pantalla completa.`, de: `Die Stories von ${a}. Tippe auf eine Story, um sie im Vollbild zu sehen.`}[LANG])],
+  [/^Démo : dans la version officielle, les vraies stories Instagram de (@\S+) arrivent ici automatiquement\.$/, a => ({en: `Demo: in the official version, the real Instagram stories from ${a} arrive here automatically.`, es: `Demo: en la versión oficial, las stories reales de ${a} llegan aquí automáticamente.`, de: `Demo: In der offiziellen Version kommen die echten Instagram-Stories von ${a} automatisch hierher.`}[LANG])],
+  [/^Les soirées et les invités sont annoncés sur l'Instagram du club : (@\S+)\.$/, a => ({en: `Nights and guests are announced on the club's Instagram: ${a}.`, es: `Las fiestas y los invitados se anuncian en el Instagram del club: ${a}.`, de: `Partys und Gäste werden auf dem Instagram des Clubs angekündigt: ${a}.`}[LANG])],
+  [/^✓ (.+)$/, a => '✓ ' + tr(a)],
+  [/^(\p{Extended_Pictographic}️?) (.+)$/u, (e, s) => e + ' ' + tr(s)],
+  [/^(.+) (\p{Extended_Pictographic}️?)$/u, (s, e) => tr(s) + ' ' + e],
+];
+const DICT = Object.fromEntries(TXT.map(r => [r[0], r[LANGS.indexOf(LANG)]]));
+function tr(s) {
+  if (LANG === 'fr' || !s || !s.trim()) return s;
+  const k = s.trim(), pre = s.match(/^\s*/)[0], post = s.match(/\s*$/)[0];
+  let out = DICT[k];
+  if (out == null) for (const [re, f] of RX) { const m = k.match(re); if (m) { out = f(...m.slice(1)); break; } }
+  if (out == null && k.includes(' · ')) out = k.split(' · ').map(tr).join(' · ');
+  return pre + (out ?? k) + post;
+}
+function trDom(root) { // traduit les textes et attributs d'un morceau de page
+  if (LANG === 'fr') return;
+  if (root.nodeType === 3) { if (!root.parentNode?.closest('script,style')) root.nodeValue = tr(root.nodeValue); return; }
+  if (root.nodeType !== 1 || root.closest('script,style')) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) { const v = tr(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; }
+  [root, ...root.querySelectorAll('[placeholder],[aria-label],[title],img[alt]')].forEach(e => ['placeholder', 'aria-label', 'title', 'alt'].forEach(a => e.hasAttribute?.(a) && e.setAttribute(a, tr(e.getAttribute(a)))));
+}
+function setLang(l) { st.lang = l; save(); location.reload(); }
+document.documentElement.lang = LANG;
+const fmt = (d, o) => new Date(d).toLocaleDateString(LOC[LANG], o);
 const now = () => new Date();
 const EVENTS = [...C.soirees, ...(st.extra || [])].sort((a, b) => a.date.localeCompare(b.date)).map((e, i) => ({...e, id: 'e' + i, img: e.img || String(i % C.posts.length + 1)}));
 const PAST = C.passees.map((e, i) => ({...e, id: 'p' + i, lineup: e.lineup || [], img: e.img || String((i + 5) % C.posts.length + 1)}));
@@ -557,7 +921,7 @@ const upcoming = () => EVENTS.filter(e => new Date(e.date) > new Date(+now() - 6
 const NEXT = upcoming()[0] || EVENTS[EVENTS.length - 1];
 const LEVELS = [[0,'Curieux·se','Coche les soirées où tu étais.'],[1,'Initié·e','Bienvenue dans la famille.'],[3,'Habitué·e','Tu connais le chemin par cœur.'],[6,C.niveau || 'Pilier du club','Tu fais partie des murs.']];
 
-function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2400); }
+function toast(m) { navigator.vibrate?.(15); const t = $('toast'); t.textContent = tr(m); t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2400); }
 function go(t) {
   document.querySelectorAll('section').forEach(s => s.classList.toggle('on', s.id === t));
   if (t === 'pulse' && !$('pulse-f').src) $('pulse-f').src = 'https://azizbena-stack.github.io/pm-pj6rrda7cpu4q1ck/';
@@ -572,6 +936,21 @@ $('hero').src = img(C.hero);
 $('nx-name').textContent = NEXT.nom;
 $('nx-when').textContent = fmt(NEXT.date, {weekday:'long', day:'numeric', month:'long'}) + ' · ' + NEXT.date.slice(11, 16) + ' · ' + C.nom;
 $('nx-buy').href = NEXT.url || C.billetterie;
+$('nx-poster').src = img(NEXT.img);
+$('sp-nom').textContent = C.court; $('sp-ville').textContent = C.ville;
+// « Ils sont passés » : artistes déjà venus (doublé pour le défilé en boucle)
+const LEG = [...new Set([...(C.ilsontjoue || []), ...C.passees.flatMap(e => e.lineup || [])])].filter(a => !/all night/i.test(a)).slice(0, 24);
+$('legend').innerHTML = [...LEG, ...LEG].map(a => `<span>${esc(a)}</span>`).join('');
+$('legend-b').hidden = LEG.length < 3;
+['tl-1', 'tl-2', 'tl-3', 'tl-4'].forEach((id, i) => $(id).src = img(String((i * 3 + 2) % C.posts.length + 1)));
+function ics() { // ajoute la prochaine soirée à l'agenda du téléphone
+  const z = d => new Date(d).toISOString().replace(/[-:]|\.\d+/g, '');
+  const end = new Date(NEXT.date.slice(0, 10) + 'T' + (C.fermeture || '05:00')); end.setDate(end.getDate() + 1);
+  const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//' + C.nom + ' demo//FR', 'BEGIN:VEVENT', 'UID:' + NEXT.id + '-' + C.id + '@club-demo',
+    'DTSTAMP:' + z(now()), 'DTSTART:' + z(NEXT.date), 'DTEND:' + z(end), 'SUMMARY:' + NEXT.nom + ' · ' + C.nom,
+    'LOCATION:' + (C.nom + ', ' + C.adresse).replace(/[,;]/g, '\\$&'), 'URL:' + (NEXT.url || C.billetterie), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([body], {type: 'text/calendar'})); a.download = C.id + '-' + NEXT.date.slice(0, 10) + '.ics'; a.click();
+}
 function tick() {
   const s = Math.max(0, (new Date(NEXT.date) - now()) / 1000);
   $('count').innerHTML = [[s / 86400, 'jours'], [s / 3600 % 24, 'heures'], [s / 60 % 60, 'min'], [s % 60, 'sec']]
@@ -684,7 +1063,8 @@ const CT = upcoming().find(e => new Date(e.date) - now() > 3 * 86400e3) || NEXT;
 const CT_DRAW = new Date(new Date(CT.date.slice(0, 10) + 'T18:00') - 86400e3);
 $('ct-img').src = img(CT.img);
 $('ct-titre').textContent = '2 places pour ' + (CT.lineup[0] || CT.nom);
-$('ct-txt').innerHTML = `${esc(CT.nom)} · ${fmt(CT.date, {weekday:'long', day:'numeric', month:'long'})}. Tirage au sort le <b>${fmt(CT_DRAW, {day:'numeric', month:'long'})} à 18h</b>. Bonus : chaque pote invité = 1 chance de plus.`;
+$('ct-txt').innerHTML = `<b>${esc(fmt(CT.date, {weekday:'long', day:'numeric', month:'long'}))}</b> · ${esc(CT.nom)}<br><span></span>`;
+$('ct-txt').querySelector('span').textContent = `Tirage au sort le ${fmt(CT_DRAW, {day:'numeric', month:'long'})} à 18h. Bonus : chaque pote invité = 1 chance de plus.`;
 st.ct ||= 0; // 0 = pas inscrit, sinon nombre de chances
 function renderContest() {
   const left = Math.ceil((CT_DRAW - now()) / 86400000);
@@ -765,7 +1145,7 @@ function renderMe() {
   document.querySelectorAll('.sw').forEach(b => b.classList.toggle('on', !!st.sw[b.dataset.k]));
 }
 document.querySelectorAll('.sw').forEach(b => b.onclick = () => { st.sw[b.dataset.k] = !st.sw[b.dataset.k]; save(); renderMe(); toast(st.sw[b.dataset.k] ? 'Activé' : 'Désactivé'); });
-function wipe() { if (!confirm('Effacer ton passeport, tes favoris et tes réglages ?')) return; try { localStorage.removeItem(KEY); } catch {} location.reload(); }
+function wipe() { if (!confirm(tr('Effacer ton passeport, tes favoris et tes réglages ?'))) return; try { localStorage.removeItem(KEY); } catch {} location.reload(); }
 function install() { toast(/iPhone|iPad/.test(navigator.userAgent) ? 'Safari : Partager ⬆️ puis « Sur l\'écran d\'accueil »' : 'Menu ⋮ puis « Ajouter à l\'écran d\'accueil »'); }
 
 // Carte de fidélité (récompenses d'exemple, le club choisit les siennes)
@@ -839,9 +1219,79 @@ const bars = (el, rows) => { const m = Math.max(...rows.map(r => r[1])); $(el).i
 bars('cities', C.villes);
 bars('wanted', C.sondage);
 function sendPush() { const v = $('push').value.trim(); if (!v) return toast('Écris un message'); $('push').value = ''; toast('Envoyé (démo)'); }
+bars('ages', [['18-20 ans', 22], ['21-24 ans', 34], ['25-29 ans', 26], ['30-35 ans', 12], ['35 ans et +', 6]]);
 
-renderStars(); renderMeet(); renderPoll(); renderEvents(); renderArtists(); renderMe(); renderFid(); renderSub(); renderAdded(); renderPlan(); renderResa(); renderGuest(); renderContest();
-const tab = new URLSearchParams(location.search).get('tab'); if (tab && $(tab)) go(tab);
+// Options reprises de La Churascaia : navette, boutique, privatisation, parrainage, stories publiées par le gérant
+// Navette fictive (départs, prix et places de démo) ; le club peut mettre les siens : "navette": [[heure, départ, prix, places]]
+const BUS = C.navette || [['22:30', 'Gare de ' + C.ville, '8 €', 14], ['22:45', 'Centre-ville', '6 €', 9], ['23:00', 'Campus universitaire', '6 €', 18], ['23:15', 'Parking relais', '5 €', 5]];
+st.bus ??= -1;
+function renderBus() {
+  $('bus').innerHTML = BUS.map(([h, pt, px, left], i) => `<div class="bus"><b class="u">${h}</b><div><b>${esc(pt)}</b><div class="mut">${esc(px)} · ${left - (st.bus === i ? 1 : 0)} places · retour ${C.fermeture || '05:30'}</div></div>
+    <button class="been ${st.bus === i ? 'on' : ''}" onclick="bookBus(${i})">${st.bus === i ? '✓ Réservé' : 'Réserver'}</button></div>`).join('');
+  $('g-bus').textContent = 27 + (st.bus >= 0 ? 1 : 0);
+}
+function bookBus(i) { st.bus = st.bus === i ? -1 : i; save(); renderBus(); toast(st.bus < 0 ? 'Réservation annulée' : `Place réservée · départ ${BUS[i][0]} · ${BUS[i][1]}`); }
+// Boutique : articles d'exemple au logo du club ("boutique": [[nom, prix, tee|hood|cap|tote]] pour les vrais)
+const MK = {tee: ['M30 14 L12 26 L4 44 L20 50 L24 42 L24 92 L76 92 L76 42 L80 50 L96 44 L88 26 L70 14 Q60 24 50 24 Q40 24 30 14Z', 44],
+  hood: ['M34 18 Q50 4 66 18 L84 26 L96 86 L82 88 L76 48 L76 94 L24 94 L24 48 L18 88 L4 86 L16 26Z', 44],
+  cap: ['M16 62 Q16 26 50 24 Q84 26 84 62Z M10 62 L90 62 Q98 64 96 70 Q60 76 10 68Z', 46],
+  tote: ['M20 38 L80 38 L86 94 L14 94Z', 61, 'M36 40 Q36 12 50 12 Q64 12 64 40']};
+const SHOP = C.boutique || [['T-shirt logo', '25 €', 'tee'], ['Sweat à capuche', '45 €', 'hood'], ['Casquette', '20 €', 'cap'], ['Tote bag', '12 €', 'tote']];
+st.cart ||= []; st.priv ||= [];
+function renderShop() {
+  $('shop-list').innerHTML = SHOP.map(([n, p, k], i) => { const [d, y, h] = MK[k] || MK.tee; return `<div><div class="mk"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="${d}"/>${h ? `<path class="h" d="${h}"/>` : ''}</svg><img src="${P}logo.jpg" alt="" style="top:${y}%"></div>
+    <div class="in"><b>${esc(n)}</b><span class="p">${esc(p)}</span><button class="${st.cart.includes(i) ? 'on' : ''}" onclick="cart(${i})">${st.cart.includes(i) ? '✓ Réservé au vestiaire' : 'Réserver au vestiaire'}</button></div></div>`; }).join('');
+  $('g-shop').textContent = 23 + st.cart.length;
+}
+function cart(i) { const k = st.cart.indexOf(i); k < 0 ? st.cart.push(i) : st.cart.splice(k, 1); save(); renderShop(); if (k < 0) toast(SHOP[i][0] + ' réservé au vestiaire'); }
+// Privatisation (demande de devis, rien n'est envoyé)
+$('pv-img').src = img(C.hero);
+if (C.tel) $('pv-call').href = 'tel:' + C.tel;
+else Object.assign($('pv-call'), {href: 'https://www.instagram.com/' + C.instagram + '/', target: '_blank', rel: 'noopener', textContent: 'Écrire au club sur Instagram'});
+let pvn = 80;
+function pvN(d) { pvn = Math.max(20, Math.min(1500, pvn + d)); $('pv-n').textContent = pvn; }
+function sendPriv() {
+  const nom = $('pv-nom').value.trim(), d = $('pv-date').value;
+  if (!nom || !d) return toast('Nom et date obligatoires');
+  st.priv.push({nom, d, t: $('pv-type').value, n: pvn}); save(); renderPriv();
+  $('pv-nom').value = $('pv-tel').value = ''; toast(`Demande envoyée : ${$('pv-type').value}, ${pvn} invités`);
+}
+function renderPriv() { $('g-priv').textContent = 3 + st.priv.length; }
+// Parrainage : code = 3 lettres du club + fin du numéro de carte
+$('ref-code').textContent = (C.court.normalize('NFD').replace(/[^A-Za-z]/g, '').slice(0, 3) || 'CLB').toUpperCase() + st.no.slice(-4);
+function refer() {
+  const t = `Viens au ${C.nom} avec mon code ${$('ref-code').textContent} 🎉 ${location.href.split('?')[0]}`;
+  navigator.share ? navigator.share({text: t}).catch(() => {}) : navigator.clipboard?.writeText(t).then(() => toast('Lien copié'));
+}
+// Story publiée par le gérant (démo) : elle arrive en tête des stories, avec une notification façon téléphone
+let notifT;
+function notify(txt) {
+  navigator.vibrate?.([20, 60, 20]);
+  $('nt-t').textContent = C.court + ' a publié une story'; $('nt-t').nextElementSibling.textContent = tr(txt || 'Touche pour la regarder');
+  $('notif').classList.add('on'); clearTimeout(notifT); notifT = setTimeout(() => $('notif').classList.remove('on'), 5000);
+}
+function openNotif() { $('notif').classList.remove('on'); go('stab'); openStory(0); }
+function addLiveStory(n, txt) {
+  const g = STORIES.find(s => s[0] === 'En direct');
+  if (g) { g[1].unshift(n); STORIES.splice(STORIES.indexOf(g), 1); STORIES.unshift(g); } else STORIES.unshift(['En direct', [n]]);
+  st.seen = st.seen.filter(x => x !== 'En direct'); save(); renderStories(); notify(txt);
+}
+const SIMTXT = ['Ça commence à se remplir 🔥', 'Ce soir au club 🪩', 'On vous attend ✨', 'L\'équipe est prête ❤️‍🔥'];
+function simStory() { // le gérant publie sur Instagram → la story arrive dans l'app quelques secondes plus tard
+  const txt = $('sim-txt').value.trim() || SIMTXT[Math.floor(Math.random() * SIMTXT.length)]; $('sim-txt').value = '';
+  toast('Story publiée sur Instagram (simulation)…');
+  setTimeout(() => addLiveStory(String(1 + Math.floor(Math.random() * C.posts.length)), txt), 2500);
+}
+const renderStories0 = renderStories;
+renderStories = () => { renderStories0(); $('g-live').textContent = STORIES.reduce((a, s) => a + s[1].length, 0); };
+
+renderStars(); renderMeet(); renderPoll(); renderEvents(); renderArtists(); renderMe(); renderFid(); renderSub(); renderAdded(); renderPlan(); renderResa(); renderGuest(); renderContest(); renderBus(); renderShop(); renderPriv(); renderStories();
+$('lang').value = LANG;
+trDom(document.body);
+new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(trDom))).observe(document.body, {childList: true, subtree: true});
+const Q = new URLSearchParams(location.search);
+setTimeout(() => $('splash').classList.add('off'), Q.has('tab') || Q.has('test') || Q.has('cap') || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1500);
+const tab = Q.get('tab'); if (tab && $(tab)) go(tab);
 
 // En direct : quand le club a connecté son Instagram, un fichier « live » (posts + stories, mis à jour par l'API Meta)
 // est relu toutes les minutes : les nouveautés apparaissent sans republier l'app. Sans fichier, rien ne change.
@@ -872,7 +1322,7 @@ function simLive() {  // démo : montre ce qui se passe quand le club publie
   const n = String(1 + Math.floor(Math.random() * C.posts.length));
   const L = {maj: String(Date.now()), posts: [['demo' + Date.now(), C.court + ' · à l\'instant'], ...C.posts.map((p, i) => [...p.slice(0, 3), LIVEIMG[i + 1] || img(i + 1)])].slice(0, 12)};
   L.posts[0][3] = img(n);
-  L.stories = [['En direct', [img(n)]], ...STORIES.filter(s => s[0] !== 'En direct')];
+  L.stories = [['En direct', [n]], ...STORIES.filter(s => s[0] !== 'En direct')];
   applyLive(L); liveMaj = L.maj; st.seen = (st.seen || []).filter(x => x !== 'En direct'); renderStories();
 }
 pollLive(); setInterval(pollLive, 60000);
@@ -885,6 +1335,10 @@ if (location.search.includes('test')) {
   const sv = [...st.seen]; openStory(0); for (let k = STORIES[0][1].length; k--;) stStep(1);
   console.assert(sg === Math.min(1, STORIES.length - 1) || !$('story').classList.contains('on'), 'stories'); closeStory(); st.seen = sv; save();
   { const n0 = C.posts.length, c0 = C.posts[0][0]; simLive(); console.assert(C.posts[0][0] !== c0 && C.posts.length <= Math.max(n0, 12) && !$('live-pill').hidden && STORIES[0][0] === 'En direct', 'direct'); }
+  { const k = STORIES[0][1].length; addLiveStory('1', 'test'); console.assert(STORIES[0][0] === 'En direct' && STORIES[0][1].length === k + 1 && $('notif').classList.contains('on'), 'story du gérant'); $('notif').classList.remove('on'); }
+  console.assert($('shop-list').children.length === SHOP.length && $('bus').children.length === BUS.length && $('ref-code').textContent.length >= 5, 'boutique, navette, parrainage');
+  console.assert(TXT.every(r => r.length === 4) && /\b[hcnbti]v\d\b/.test(document.body.className), 'langues, style');
+  { const b = st.bus; st.bus = -1; bookBus(0); console.assert(st.bus === 0, 'navette'); st.bus = b; save(); renderBus(); }
   console.log('selftest ok');
 }
 
